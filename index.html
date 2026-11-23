@@ -27,6 +27,9 @@ button{font:inherit;cursor:pointer}
 .clock span{color:#d8e4de}
 .scene{flex:1 1 54%;position:relative;min-height:300px}
 .scene svg{position:absolute;top:0;left:0;width:100%;height:100%}
+.poster{position:absolute;top:0;left:0;right:0;bottom:0;opacity:0;transition:opacity 1.6s ease}.poster.on{opacity:1}
+.cap{position:absolute;left:22px;bottom:16px;font-family:"Josefin Sans",Helvetica,sans-serif;line-height:1}.cap b{display:block;font-size:clamp(28px,4.4vw,44px);letter-spacing:.12em}.cap span{display:block;margin-top:6px;font-weight:600;font-size:13px;letter-spacing:.2em}
+.scene{cursor:pointer}
 .langs{position:absolute;top:14px;right:14px;display:flex;z-index:2}
 .langs button{background:rgba(255,255,255,.85);color:#1f3d33;border:0;border-radius:22px;min-width:48px;min-height:44px;margin-left:8px;font-weight:600}
 .langs button.on{background:#b8402f;color:#fff}
@@ -68,9 +71,7 @@ ul{margin:6px 0 0;padding-left:20px;color:var(--soft)}li{margin:3px 0}
 .foot{text-align:center;color:var(--soft);font-size:14px;padding:8px 16px 28px}
 @media (max-width:900px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.sos{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:600px){.hero{flex-direction:column-reverse}.scene{min-height:200px}.greet h1{font-size:32px}.grid,.cards{grid-template-columns:minmax(0,1fr)}.top h2{font-size:27px}}
-#sun{animation:rise 3s ease-out both}
-@keyframes rise{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
-@media (prefers-reduced-motion:reduce){#sun{animation:none}}
+@media (prefers-reduced-motion:reduce){.poster{transition:none}}
 </style>
 </head>
 <body>
@@ -85,21 +86,42 @@ ul{margin:6px 0 0;padding-left:20px;color:var(--soft)}li{margin:3px 0}
     </div>
     <div class="scene">
       <div class="langs" id="langs"></div>
-      <svg viewBox="0 0 600 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-        <defs>
-          <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7fc4d8"/><stop offset=".7" stop-color="#cfe9ee"/><stop offset="1" stop-color="#f4e7d6"/></linearGradient>
-          <linearGradient id="m1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8fa9b8"/><stop offset="1" stop-color="#5d7a8a"/></linearGradient>
-          <linearGradient id="m2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4f6f74"/><stop offset="1" stop-color="#2f4f4c"/></linearGradient>
-          <g id="larch"><path d="M0 0 L-14 30 L-6 30 L-20 58 L-8 58 L-24 90 L24 90 L8 58 L20 58 L6 30 L14 30Z" fill="#c98a2a"/><path d="M0 0 L14 30 L6 30 L20 58 L8 58 L24 90 L0 90Z" fill="#a8701d"/><rect x="-3" y="90" width="6" height="14" fill="#5b3a1e"/></g>
-        </defs>
-        <rect width="600" height="300" fill="url(#sky)"/>
-        <circle id="sun" cx="470" cy="80" r="34" fill="#fff3d6"/>
-        <path d="M0 210 L90 140 L150 170 L250 60 L310 110 L360 85 L450 160 L520 120 L600 175 L600 300 L0 300Z" fill="url(#m1)"/>
-        <path d="M250 60 L283 97 L268 94 L258 108 L246 92 L232 102 L222 92Z M360 85 L382 106 L368 104 L356 114 L346 101Z" fill="#fff"/>
-        <path d="M0 250 L120 185 L210 222 L330 165 L430 218 L520 190 L600 222 L600 300 L0 300Z" fill="url(#m2)"/>
-        <path d="M0 278 Q300 250 600 272 L600 300 L0 300Z" fill="#e9eef0"/>
-        <use href="#larch" x="70" y="182"/><use href="#larch" x="112" y="198"/><use href="#larch" x="520" y="176"/><use href="#larch" x="560" y="194"/>
-      </svg>
+      <div class="poster on"><svg  viewBox="0 0 600 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2b4a6b"/><stop offset=".55" stop-color="#e98b5a"/><stop offset="1" stop-color="#f3d49a"/></linearGradient><g id="lr"><path d="M0 0 L-12 26 L-5 26 L-17 50 L-6 50 L-20 78 L20 78 L6 50 L17 50 L5 26 L12 26Z"/><rect x="-2" y="78" width="4" height="10"/></g></defs>
+<rect width="600" height="300" fill="url(#g1)"/><circle cx="330" cy="165" r="56" fill="#f7e4b5"/>
+<path d="M0 200 L70 150 L120 175 L200 95 L250 130 L300 70 L360 125 L420 90 L500 150 L600 120 V300 H0Z" fill="#6b6f9a"/>
+<path d="M200 95 L222 117 L210 116 L200 128 L190 114 L178 117Z M300 70 L326 96 L312 94 L300 108 L288 92 L274 96Z M420 90 L440 110 L428 108 L420 118 L410 106 L400 110Z" fill="#f3ede0"/>
+<path d="M260 300 C280 230 300 200 320 180 C330 205 350 240 380 300Z" fill="#bfe0e3"/>
+<path d="M0 240 L130 200 L240 250 L250 300 H0Z M600 230 L470 205 L380 260 L370 300 H600Z" fill="#1f3d33"/>
+<g fill="#13261f"><use href="#lr" x="60" y="196"/><use href="#lr" x="100" y="206" /><use href="#lr" x="530" y="196"/><use href="#lr" x="565" y="208"/></g>
+</svg><div class="cap" style="color:#f3ede0"><b>PONTRESINA</b><span>ENGIADINA · 1805 M</span></div></div><div class="poster"><svg  viewBox="0 0 600 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="600" height="300" fill="#8cc7c9"/><ellipse cx="120" cy="60" rx="60" ry="14" fill="#f3ede0" opacity=".8"/><ellipse cx="470" cy="45" rx="70" ry="12" fill="#f3ede0" opacity=".7"/>
+<path d="M0 170 L90 100 L160 140 L260 60 L340 120 L420 80 L520 140 L600 110 V300 H0Z" fill="#e8eef0"/>
+<path d="M260 60 L300 300 H200Z M420 80 L470 300 H380Z M90 100 L120 300 H40Z" fill="#b9cfd6"/>
+<path d="M0 230 Q300 180 600 225 V300 H0Z" fill="#2f5a4a"/>
+<rect x="120" y="196" width="370" height="104" fill="#c9b48f"/><rect x="120" y="196" width="370" height="8" fill="#a88f68"/><g fill="#2f5a4a"><path d="M140 300 V250 a18 18 0 0 1 36 0 V300Z"/><path d="M196 300 V250 a18 18 0 0 1 36 0 V300Z"/><path d="M252 300 V250 a18 18 0 0 1 36 0 V300Z"/><path d="M308 300 V250 a18 18 0 0 1 36 0 V300Z"/><path d="M364 300 V250 a18 18 0 0 1 36 0 V300Z"/><path d="M420 300 V250 a18 18 0 0 1 36 0 V300Z"/></g>
+<path d="M455 170 l12 -22 M467 148 h14" stroke="#3a2a22" stroke-width="2"/><g transform="translate(150,170)"><rect width="72" height="26" rx="4" fill="#c8402f"/><rect y="-3" width="72" height="5" rx="2" fill="#8e2a1f"/><rect x="6" y="6" width="11" height="9" fill="#f3ede0"/><rect x="22" y="6" width="11" height="9" fill="#f3ede0"/><rect x="38" y="6" width="11" height="9" fill="#f3ede0"/><rect x="54" y="6" width="11" height="9" fill="#f3ede0"/></g><g transform="translate(228,170)"><rect width="72" height="26" rx="4" fill="#c8402f"/><rect y="-3" width="72" height="5" rx="2" fill="#8e2a1f"/><rect x="6" y="6" width="11" height="9" fill="#f3ede0"/><rect x="22" y="6" width="11" height="9" fill="#f3ede0"/><rect x="38" y="6" width="11" height="9" fill="#f3ede0"/><rect x="54" y="6" width="11" height="9" fill="#f3ede0"/></g><g transform="translate(306,170)"><rect width="72" height="26" rx="4" fill="#c8402f"/><rect y="-3" width="72" height="5" rx="2" fill="#8e2a1f"/><rect x="6" y="6" width="11" height="9" fill="#f3ede0"/><rect x="22" y="6" width="11" height="9" fill="#f3ede0"/><rect x="38" y="6" width="11" height="9" fill="#f3ede0"/><rect x="54" y="6" width="11" height="9" fill="#f3ede0"/></g><g transform="translate(384,170)"><rect width="72" height="26" rx="4" fill="#c8402f"/><rect y="-3" width="72" height="5" rx="2" fill="#8e2a1f"/><rect x="6" y="6" width="11" height="9" fill="#f3ede0"/><rect x="22" y="6" width="11" height="9" fill="#f3ede0"/><rect x="38" y="6" width="11" height="9" fill="#f3ede0"/><rect x="54" y="6" width="11" height="9" fill="#f3ede0"/></g>
+</svg><div class="cap" style="color:#1f3d33"><b>BERNINA</b><span>LINIA DAL BERNINA · UNESCO</span></div></div><div class="poster"><svg  viewBox="0 0 600 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9fc9dc"/><stop offset="1" stop-color="#f3ede0"/></linearGradient></defs>
+<rect width="600" height="300" fill="url(#g3)"/><circle cx="470" cy="70" r="30" fill="#fbf3dc"/>
+<path d="M0 180 L80 120 L150 160 L240 90 L330 150 L430 105 L520 160 L600 130 V300 H0Z" fill="#5c86a6"/>
+<path d="M240 90 L262 112 L250 110 L240 122 L230 108 L218 112Z M430 105 L450 125 L440 123 L430 133 L420 121 L410 125Z" fill="#f3ede0"/>
+<path d="M0 205 Q300 185 600 205 V300 H0Z" fill="#e3f0f2"/>
+<path d="M60 300 L300 228 M80 300 L310 230" stroke="#bcd3d8" stroke-width="2"/>
+<g transform="translate(320,236)"><circle cx="2" cy="-42" r="6" fill="#c8402f"/><g stroke="#1f2a3a" stroke-width="6" stroke-linecap="round" fill="none"><path d="M0 -34 L-8 -10"/><path d="M-8 -10 L-24 10 M-8 -10 L8 10"/><path d="M-2 -28 L16 -16"/></g><path d="M16 -16 L30 12 M-4 -26 L-22 10" stroke="#1f2a3a" stroke-width="2"/><path d="M-44 13 H-10 M-6 13 H30" stroke="#c8402f" stroke-width="3" stroke-linecap="round"/></g>
+<g fill="#1f3d33"><path d="M500 210 l-14 40 h28Z M530 200 l-18 52 h36Z M560 212 l-13 38 h26Z M40 215 l-13 36 h26Z"/></g>
+</svg><div class="cap" style="color:#2b4a6b"><b>ENGIADINA</b><span>LANGLAUF · CROSS-COUNTRY</span></div></div><div class="poster"><svg  viewBox="0 0 600 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="600" height="300" fill="#d97a4a"/><rect width="600" height="150" fill="#e9a06a"/><circle cx="110" cy="80" r="34" fill="#f7e4b5"/>
+<path d="M0 190 L120 110 L220 160 L330 80 L450 150 L600 100 V300 H0Z" fill="#8a5a6a"/><path d="M330 80 L352 102 L340 100 L330 112 L320 98 L308 102Z" fill="#f3ede0"/>
+<rect x="200" y="140" width="210" height="125" fill="#efe6d2"/>
+<polygon points="182,142 305,82 428,142" fill="#5b3a1e"/><path d="M186 140 L305 86 L424 140" stroke="#f3ede0" stroke-width="5" fill="none"/>
+<polyline points="206,152 214,146 222,152 230,146 238,152 246,146 254,152 262,146 270,152 278,146 286,152 294,146 302,152 310,146 318,152 326,146 334,152 342,146 350,152 358,146 366,152 374,146 382,152 390,146 398,152 404,148" stroke="#9a9284" stroke-width="2" fill="none"/>
+<g fill="#9a9284"><path d="M204 160 h8 v8 h-8Z M204 180 h8 v8 h-8Z M204 200 h8 v8 h-8Z M204 220 h8 v8 h-8Z M398 160 h8 v8 h-8Z M398 180 h8 v8 h-8Z M398 200 h8 v8 h-8Z M398 220 h8 v8 h-8Z"/></g>
+<path d="M232 265 V222 a26 26 0 0 1 52 0 V265Z" fill="#5b3a1e"/><path d="M226 265 V222 a32 32 0 0 1 64 0 V265" stroke="#9a9284" stroke-width="3" fill="none"/>
+<polygon points="314,166 346,166 341,194 319,194" fill="#cbbfa6"/><rect x="322" y="172" width="16" height="17" fill="#2b3440"/><polygon points="359,166 391,166 386,194 364,194" fill="#cbbfa6"/><rect x="367" y="172" width="16" height="17" fill="#2b3440"/><polygon points="314,214 346,214 341,242 319,242" fill="#cbbfa6"/><rect x="322" y="220" width="16" height="17" fill="#2b3440"/><polygon points="359,214 391,214 386,242 364,242" fill="#cbbfa6"/><rect x="367" y="220" width="16" height="17" fill="#2b3440"/><polygon points="289,106 321,106 316,134 294,134" fill="#cbbfa6"/><rect x="297" y="112" width="16" height="17" fill="#2b3440"/>
+<path d="M0 262 Q300 252 600 262 V300 H0Z" fill="#f3ede0"/>
+</svg><div class="cap" style="color:#3a2418"><b>ALLEGRA</b><span>CHESA ENGIADINAISA</span></div></div><div class="poster"><svg  viewBox="0 0 600 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="600" height="300" fill="#f0c36d"/><rect y="150" width="600" height="150" fill="#e8a955"/><circle cx="160" cy="90" r="44" fill="#fbe7b5"/>
+<path d="M0 200 L110 120 L190 165 L290 70 L380 140 L470 95 L600 160 V300 H0Z" fill="#7d8fa8"/>
+<path d="M290 70 L314 94 L300 92 L290 106 L280 90 L266 94Z M470 95 L490 115 L480 113 L470 123 L460 111 L450 115Z" fill="#f3ede0"/>
+<path d="M0 260 Q150 230 300 245 L360 218 Q470 205 600 230 V300 H0Z" fill="#5a4636"/>
+<g fill="#2a2420" transform="translate(410,140)"><ellipse cx="0" cy="34" rx="36" ry="17"/><path d="M24 26 L44 2 L58 4 L60 14 L48 18 L36 38Z"/><path d="M47 4 C40 -30 6 -42 -10 -24 C8 -32 30 -22 40 6Z"/><rect x="-26" y="42" width="6" height="34"/><rect x="-14" y="44" width="6" height="32"/><rect x="12" y="42" width="6" height="34"/><rect x="24" y="40" width="6" height="34"/><path d="M-34 28 l-8 -6 l4 10Z"/></g>
+</svg><div class="cap" style="color:#3a2418"><b>PIZ LANGUARD</b><span>STAMBUOCH · STEINBOCK</span></div></div>
     </div>
   </header>
   <main class="band"><nav class="grid" id="tiles"></nav></main>
@@ -313,6 +335,11 @@ document.addEventListener("click", e => {
 window.addEventListener("hashchange", () => route(true));
 render();
 setInterval(tick, 20000);
+/* Retro-Plakate wechseln alle 10 Sek., Antippen = nächstes */
+let pi = 0;
+const nextPoster = () => { const ps = document.querySelectorAll(".poster"); ps[pi].classList.remove("on"); pi = (pi + 1) % ps.length; ps[pi].classList.add("on"); };
+let pt = setInterval(nextPoster, 10000);
+document.querySelector(".scene").addEventListener("click", e => { if (e.target.closest("button")) return; nextPoster(); clearInterval(pt); pt = setInterval(nextPoster, 10000); });
 
 /* Kiosk: nach 3 Min. ohne Berührung zurück zur Startseite */
 let idle;
