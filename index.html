@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Allegra Pontresina</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@600;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* Entwurf 2 – Layout/Farben folgen später. iOS-15-tauglich: kein light-dark(), kein :has(), keine Container Queries */
+:root{--bg:#f6f3ee;--card:#fff;--ink:#1c2a25;--soft:#55635d;--pine:#1f3d33;--ice:#2f8f8a;--red:#b8402f;--line:#e2ddd4}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0f1a16;--card:#18261f;--ink:#eef2ef;--soft:#a9b7b0;--pine:#2c5446;--line:#2a3a33}}
+:root[data-theme=dark]{--bg:#0f1a16;--card:#18261f;--ink:#eef2ef;--soft:#a9b7b0;--pine:#2c5446;--line:#2a3a33}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.5 "Source Sans 3",-apple-system,Helvetica,Arial,sans-serif;overflow-x:hidden;-webkit-text-size-adjust:100%}
+h1,h2,h3{font-family:"Josefin Sans",-apple-system,Helvetica,sans-serif;line-height:1.1;margin:0}
+a{color:inherit}
+button{font:inherit;cursor:pointer}
+.hero{background:var(--pine);color:#fff;display:flex;min-height:300px}
+.greet{flex:1 1 46%;padding:28px max(4vw,20px);display:flex;flex-direction:column;justify-content:center}
+.hi{font-family:"Josefin Sans",sans-serif;color:#f2c9bf;font-size:20px;margin-bottom:6px}
+.greet h1{font-size:44px}
+.greet p{margin:12px 0 0;color:#d8e4de;max-width:30em}
+.clock{margin-top:18px;display:flex;align-items:baseline;flex-wrap:wrap}
+.clock b{font-family:"Josefin Sans",sans-serif;font-size:48px;line-height:1;margin-right:14px}
+.clock span{color:#d8e4de}
+.scene{flex:1 1 54%;position:relative;min-height:300px}
+.scene svg{position:absolute;top:0;left:0;width:100%;height:100%}
+.langs{position:absolute;top:14px;right:14px;display:flex;z-index:2}
+.langs button{background:rgba(255,255,255,.85);color:#1f3d33;border:0;border-radius:22px;min-width:48px;min-height:44px;margin-left:8px;font-weight:600}
+.langs button.on{background:#b8402f;color:#fff}
+.band{padding:24px max(4vw,16px);max-width:1240px;margin:0 auto}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.tile{display:flex;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px 18px;text-decoration:none;min-height:100px;-webkit-tap-highlight-color:transparent}
+.tile:active{transform:scale(.97)}
+.ico{flex:none;width:50px;height:50px;border-radius:14px;margin-right:14px;display:flex;align-items:center;justify-content:center;background:var(--pine)}
+.ico svg{width:30px;height:30px;fill:none;stroke:#fff;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.tile h3{font-size:21px}
+.tile p{margin:3px 0 0;color:var(--soft);font-size:15px;line-height:1.3}
+.view{display:none}.view.on{display:block}
+.top{display:flex;align-items:center;flex-wrap:wrap;margin-bottom:16px}
+.back{font-weight:600;background:var(--pine);color:#fff;border:0;border-radius:24px;padding:11px 22px;min-height:48px;margin-right:16px;text-decoration:none}
+.top h2{font-size:34px}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.c{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;position:relative}
+.c h3{font-size:20px;margin:0 46px 6px 0}
+.c p{margin:0;color:var(--soft)}
+.addr{font-size:15px;margin-top:6px;color:var(--soft)}
+.tag{display:inline-block;margin-top:8px;font-size:14px;font-weight:600;color:var(--ice)}
+.links a{display:inline-block;margin:10px 10px 0 0;background:var(--ice);color:#fff;text-decoration:none;font-weight:600;padding:10px 18px;border-radius:22px;min-height:44px}
+.fav{position:absolute;top:10px;right:10px;width:44px;height:44px;border-radius:22px;border:1px solid var(--line);background:var(--bg);font-size:22px;line-height:1;color:var(--red)}
+.chips{display:flex;flex-wrap:wrap;margin-bottom:14px}
+.chips button{border:2px solid var(--pine);background:transparent;color:var(--ink);padding:9px 18px;min-height:46px;border-radius:24px;margin:0 10px 8px 0;font-weight:600}
+.chips button.on{background:var(--pine);color:#fff}
+.steps{counter-reset:s;list-style:none;padding:0;margin:0}
+.steps li{counter-increment:s;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 18px 14px 70px;margin-bottom:12px;position:relative}
+.steps li::before{content:counter(s);position:absolute;left:16px;top:14px;width:40px;height:40px;border-radius:20px;background:var(--red);color:#fff;font:700 20px/40px "Josefin Sans",sans-serif;text-align:center}
+.steps b{display:block;font-size:18px}
+ul{margin:6px 0 0;padding-left:20px;color:var(--soft)}li{margin:3px 0}
+.big{font-family:"Josefin Sans",sans-serif;font-size:24px;color:var(--ink)}
+.todo{color:var(--red);font-size:14px;font-weight:600}
+.sos{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:14px}
+.sos div{background:var(--red);color:#fff;border-radius:16px;padding:14px;text-align:center}
+.sos b{display:block;font:700 38px/1.1 "Josefin Sans",sans-serif}
+.more{margin-top:16px;color:var(--soft)}
+.empty{color:var(--soft);padding:20px 0}
+.foot{text-align:center;color:var(--soft);font-size:14px;padding:8px 16px 28px}
+@media (max-width:900px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.sos{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){.hero{flex-direction:column-reverse}.scene{min-height:200px}.greet h1{font-size:32px}.grid,.cards{grid-template-columns:minmax(0,1fr)}.top h2{font-size:27px}}
+#sun{animation:rise 3s ease-out both}
+@keyframes rise{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){#sun{animation:none}}
+</style>
+</head>
+<body>
+
+<section class="view on" id="v-start">
+  <header class="hero">
+    <div class="greet">
+      <div class="hi" data-t="hi"></div>
+      <h1 data-t="title"></h1>
+      <p data-t="intro"></p>
+      <div class="clock"><b id="time">--:--</b><span id="date"></span></div>
+    </div>
+    <div class="scene">
+      <div class="langs" id="langs"></div>
+      <svg viewBox="0 0 600 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <defs>
+          <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7fc4d8"/><stop offset=".7" stop-color="#cfe9ee"/><stop offset="1" stop-color="#f4e7d6"/></linearGradient>
+          <linearGradient id="m1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8fa9b8"/><stop offset="1" stop-color="#5d7a8a"/></linearGradient>
+          <linearGradient id="m2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4f6f74"/><stop offset="1" stop-color="#2f4f4c"/></linearGradient>
+          <g id="larch"><path d="M0 0 L-14 30 L-6 30 L-20 58 L-8 58 L-24 90 L24 90 L8 58 L20 58 L6 30 L14 30Z" fill="#c98a2a"/><path d="M0 0 L14 30 L6 30 L20 58 L8 58 L24 90 L0 90Z" fill="#a8701d"/><rect x="-3" y="90" width="6" height="14" fill="#5b3a1e"/></g>
+        </defs>
+        <rect width="600" height="300" fill="url(#sky)"/>
+        <circle id="sun" cx="470" cy="80" r="34" fill="#fff3d6"/>
+        <path d="M0 210 L90 140 L150 170 L250 60 L310 110 L360 85 L450 160 L520 120 L600 175 L600 300 L0 300Z" fill="url(#m1)"/>
+        <path d="M250 60 L283 97 L268 94 L258 108 L246 92 L232 102 L222 92Z M360 85 L382 106 L368 104 L356 114 L346 101Z" fill="#fff"/>
+        <path d="M0 250 L120 185 L210 222 L330 165 L430 218 L520 190 L600 222 L600 300 L0 300Z" fill="url(#m2)"/>
+        <path d="M0 278 Q300 250 600 272 L600 300 L0 300Z" fill="#e9eef0"/>
+        <use href="#larch" x="70" y="182"/><use href="#larch" x="112" y="198"/><use href="#larch" x="520" y="176"/><use href="#larch" x="560" y="194"/>
+      </svg>
+    </div>
+  </header>
+  <main class="band"><nav class="grid" id="tiles"></nav></main>
+</section>
+
+<section class="view band" id="v-page"><div class="top"><a class="back" href="#" data-t="back"></a><h2 id="ptitle"></h2></div><div id="pbody"></div></section>
+
+<div class="foot" data-t="foot"></div>
+
+<script>
+{
+const L = ["de","en","it","fr"];
+const LN = {de:"DE",en:"EN",it:"IT",fr:"FR"};
+/* Mehrsprachige Texte: [de, en, it, fr] */
+const UI = {
+  hi:["Allegra! Herzlich willkommen","Allegra! Welcome","Allegra! Benvenuti","Allegra ! Bienvenue"],
+  title:["Ihre Maisonette in Pontresina","Your maisonette in Pontresina","La vostra mansarda a Pontresina","Votre duplex à Pontresina"],
+  intro:["Schön, dass Sie da sind. Alles zur Wohnung, Ausflüge, Restaurants und wichtige Nummern – einfach antippen.","Lovely to have you here. Everything about the apartment, outings, restaurants and key numbers – just tap.","Che piacere avervi qui. Tutto sull'appartamento, gite, ristoranti e numeri utili – basta toccare.","Ravis de vous accueillir. Tout sur l'appartement, les excursions, les restaurants et les numéros utiles – il suffit de toucher."],
+  back:["‹ Zurück","‹ Back","‹ Indietro","‹ Retour"],
+  foot:["Chesa Romana · Curtins 10 · 7504 Pontresina · Kurtaxe im Preis inbegriffen","Chesa Romana · Curtins 10 · 7504 Pontresina · Tourist tax included","Chesa Romana · Curtins 10 · 7504 Pontresina · Tassa di soggiorno inclusa","Chesa Romana · Curtins 10 · 7504 Pontresina · Taxe de séjour incluse"],
+  all:["Alle","All","Tutti","Tous"],
+  winter:["Winter","Winter","Inverno","Hiver"],
+  summer:["Sommer","Summer","Estate","Été"],
+  rain:["Schlechtwetter","Rainy day","Maltempo","Mauvais temps"],
+  favs:["♥ Meine Favoriten","♥ My favourites","♥ I miei preferiti","♥ Mes favoris"],
+  nofav:["Noch keine Favoriten – tippen Sie auf ♡, um etwas zu merken.","No favourites yet – tap ♡ to save something.","Nessun preferito – toccate ♡ per salvare.","Pas encore de favoris – touchez ♡ pour enregistrer."],
+  clear:["Liste leeren","Clear list","Svuota lista","Vider la liste"],
+  map:["Karte","Map","Mappa","Carte"],
+  web:["Webseite","Website","Sito web","Site web"],
+  todo:["wird ergänzt","to be added","da completare","à compléter"],
+  moreR:["Alle Restaurants und Bars im Dorf:","All restaurants and bars in the village:","Tutti i ristoranti e bar del paese:","Tous les restaurants et bars du village :"]
+};
+const TILES = [
+  ["ankunft",'<path d="M4 12h12M12 6l6 6-6 6"/><path d="M20 4v16"/>',["Ankunft","Arrival","Arrivo","Arrivée"],["Schritt für Schritt hinein","Step by step inside","Passo dopo passo","Pas à pas"]],
+  ["wohnung",'<path d="M3 11l9-7 9 7v9H3z"/><path d="M10 20v-5h4v5"/>',["Wohnung & WLAN","Apartment & Wi-Fi","Casa & Wi-Fi","Logement & Wi-Fi"],["Geräte, Regeln, WLAN","Appliances, rules, Wi-Fi","Apparecchi, regole, Wi-Fi","Appareils, règles, Wi-Fi"]],
+  ["ausfluege",'<path d="M2 20l7-12 4 6 3-4 6 10z"/>',["Ausflüge","Outings","Gite","Excursions"],["Winter, Sommer, Regentage","Winter, summer, rainy days","Inverno, estate, pioggia","Hiver, été, jours de pluie"]],
+  ["essen",'<path d="M7 3v18M4 3v5a3 3 0 006 0V3M17 3c-2 2-3 5-3 8h3v10"/>',["Restaurants","Restaurants","Ristoranti","Restaurants"],["Selbst auswählen und merken","Pick and save your own","Scegliete e salvate","Choisissez et gardez"]],
+  ["einkauf",'<path d="M3 4h2l2 12h12l2-8H6"/><circle cx="9" cy="20" r="1.5"/><circle cx="17" cy="20" r="1.5"/>',["Einkaufen","Shopping","Acquisti","Courses"],["Lebensmittel, Käse, Sport","Groceries, cheese, sports","Alimentari, formaggi, sport","Épicerie, fromage, sport"]],
+  ["musik",'<path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/>',["TV, Musik & Radio","TV, music & radio","TV, musica & radio","TV, musique & radio"],["Fernseher, Panasonic-Anlage","TV, Panasonic sound system","TV, impianto Panasonic","TV, chaîne Panasonic"]],
+  ["wetter",'<circle cx="8" cy="9" r="3"/><path d="M8 2v2M2 9h2M3.8 4.8l1.4 1.4M10 17h9a3 3 0 000-6 5 5 0 00-9 1 3 3 0 000 5z"/>',["Wetter & Bahn","Weather & trains","Meteo & treni","Météo & trains"],["Prognose, Fahrplan","Forecast, timetable","Previsioni, orari","Prévisions, horaires"]],
+  ["notfall",'<path d="M12 3l9 16H3z"/><path d="M12 10v4M12 17h.01"/>',["Notfall & Kontakt","Emergency & contact","Emergenza & contatto","Urgence & contact"],["Nummern, Arzt, Gastgeber","Numbers, doctor, host","Numeri, medico, host","Numéros, médecin, hôte"]],
+  ["abreise",'<path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 01-2 2H6a2 2 0 01-2-2V5a2 2 0 012-2h9"/>',["Abreise & Feedback","Departure & feedback","Partenza & feedback","Départ & avis"],["Checkliste, Bewertung","Checklist, review","Checklist, recensione","Check-list, avis"]]
+];
+const Q = s => "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(s);
+/* Orte: id, Kategorie, Name, Adresse, [Text de,en,it,fr], Webseite */
+const FOOD = [
+  ["r1","Café · Grill","Gianottis «Wilderei»","Via Maistra 140",["Café, Grill und Weinbar mitten im Dorf.","Café, grill and wine bar in the village centre.","Caffè, grill e wine bar in centro.","Café, grill et bar à vin au centre du village."]],
+  ["r2","Bäckerei · Café","Kochendörfer","Via Maistra 228",["Traditionsbäckerei mit Restaurant – Engadiner Nusstorte probieren!","Traditional bakery with restaurant – try the Engadine nut tart!","Panetteria storica con ristorante – provate la torta di noci engadinese!","Boulangerie traditionnelle avec restaurant – goûtez la tourte aux noix engadinoise !"]],
+  ["r3","Italienisch","Riccardo's","Via da la Staziun 42",["Italienische Küche im Station Hotel beim Bahnhof.","Italian cuisine in the Station Hotel by the railway station.","Cucina italiana nello Station Hotel vicino alla stazione.","Cuisine italienne au Station Hotel près de la gare."]],
+  ["r4","Bar · Restaurant","Pitschna Scena","Via da la Staziun",["Gemütliche Bar mit Restaurant, beliebt für den Apéro.","Cosy bar and restaurant, popular for an aperitif.","Bar accogliente con ristorante, ideale per l'aperitivo.","Bar chaleureux avec restaurant, idéal pour l'apéro."]],
+  ["r5","Gourmet","Grand Hotel Kronenhof","Via Maistra 130",["Mehrere Restaurants, vom Lunch bis zum Gourmetmenü im Kronenstübli.","Several restaurants, from lunch to the gourmet menu at Kronenstübli.","Diversi ristoranti, dal pranzo al menu gourmet del Kronenstübli.","Plusieurs restaurants, du déjeuner au menu gastronomique du Kronenstübli."],"https://kronenhof.com/restaurants"],
+  ["r6","Ausflug","Hotel Roseggletscher","Val Roseg",["Im autofreien Val Roseg – zu Fuss, mit Kutsche oder Langlaufski.","In the car-free Val Roseg – on foot, by horse carriage or cross-country skis.","Nella Val Roseg senza auto – a piedi, in carrozza o con gli sci di fondo.","Dans le Val Roseg sans voitures – à pied, en calèche ou à ski de fond."]],
+  ["r7","Alp","Alp-Schaukäserei Morteratsch","Morteratsch",["Alpkäserei mit Restaurant beim Bahnhof Morteratsch.","Alpine show dairy with restaurant near Morteratsch station.","Caseificio alpino con ristorante vicino alla stazione Morteratsch.","Fromagerie d'alpage avec restaurant près de la gare de Morteratsch."]],
+  ["r8","Einfach","Cuntschett","Via da la Staziun",["Unkompliziertes Restaurant der Jugendherberge beim Bahnhof.","Easy-going restaurant of the youth hostel by the station.","Ristorante semplice dell'ostello vicino alla stazione.","Restaurant simple de l'auberge de jeunesse près de la gare."]]
+];
+const SHOP = [
+  ["s1","Supermarkt","Coop Pontresina","Pontresina",["Supermarkt für den täglichen Einkauf.","Supermarket for everyday shopping.","Supermercato per la spesa quotidiana.","Supermarché pour les courses du quotidien."]],
+  ["s2","Käse","Sennerei Pontresina","Via Cruscheda 3",["Rund 300 Käse und Milchprodukte aus der Region.","Around 300 cheeses and dairy products from the region.","Circa 300 formaggi e latticini della regione.","Environ 300 fromages et produits laitiers régionaux."]],
+  ["s3","Bäckerei","Bäckerei Kochendörfer","Via Maistra 228",["Über 40 Brotsorten, auch sonntags offen.","Over 40 kinds of bread, open on Sundays too.","Oltre 40 tipi di pane, aperto anche la domenica.","Plus de 40 sortes de pain, ouvert aussi le dimanche."]],
+  ["s4","Sport","Mountainshop Pontresina","Via Maistra 147",["Bergsport-Ausrüstung und Beratung.","Mountain sports gear and advice.","Attrezzatura e consulenza per la montagna.","Équipement et conseils de sports de montagne."]],
+  ["s5","Langlauf","Nordic Shop","Pontresina",["Langlauf-Miete und Fachberatung.","Cross-country ski rental and expert advice.","Noleggio sci di fondo e consulenza.","Location de ski de fond et conseils."],"https://engadin.ch/en/rent/nordic-shop"],
+  ["s6","Bücher","Schocher Papeterie & Bücher","Via Maistra 181",["Bücher, Karten und Papeterie.","Books, maps and stationery.","Libri, cartine e cartoleria.","Livres, cartes et papeterie."]],
+  ["s7","Apotheke","Apotheke","Pontresina",["Nächste Apotheke auf der Karte anzeigen.","Show the nearest pharmacy on the map.","Mostra la farmacia più vicina sulla mappa.","Afficher la pharmacie la plus proche."]]
+];
+const TRIPS = [
+  ["t1","w","Diavolezza",["Seilbahn auf knapp 3000 m, Blick auf Piz Palü und Bernina – auch für Nicht-Skifahrer.","Cable car to nearly 3000 m with views of Piz Palü and Bernina – also for non-skiers.","Funivia a quasi 3000 m con vista su Piz Palü e Bernina – anche per chi non scia.","Téléphérique à près de 3000 m, vue sur le Piz Palü et la Bernina – aussi pour les non-skieurs."]],
+  ["t2","w","Muottas Muragl",["Standseilbahn hoch, Schlittelweg hinunter. Berühmte Sonnenuntergänge über den Seen.","Funicular up, toboggan run down. Famous sunsets over the lakes.","Su in funicolare, giù in slittino. Tramonti famosi sui laghi.","Montée en funiculaire, descente en luge. Couchers de soleil célèbres sur les lacs."]],
+  ["t3","w","Val Roseg",["Pferdekutsche oder Langlauf ins autofreie Tal.","Horse carriage or cross-country skiing into the car-free valley.","In carrozza o con gli sci di fondo nella valle senza auto.","Calèche ou ski de fond dans la vallée sans voitures."]],
+  ["t4","w","Langlauf · Cross-country",["Loipen direkt ab Pontresina. Im März: Engadin Skimarathon.","Trails right from Pontresina. In March: Engadin Skimarathon.","Piste da Pontresina. A marzo: Engadin Skimarathon.","Pistes depuis Pontresina. En mars : Engadin Skimarathon."]],
+  ["t5","r","Bellavita Erlebnisbad",["Hallenbad und Wellness im Dorf – ideal bei schlechtem Wetter.","Indoor pool and spa in the village – perfect on a rainy day.","Piscina coperta e wellness in paese – ideale col brutto tempo.","Piscine couverte et spa au village – idéal par mauvais temps."]],
+  ["t6","r","St. Moritz",["Wenige Minuten mit Zug oder Bus: See, Shopping, Museen.","A few minutes by train or bus: lake, shopping, museums.","Pochi minuti in treno o bus: lago, negozi, musei.","Quelques minutes en train ou bus : lac, boutiques, musées."]],
+  ["t7","s","Gletscherweg Morteratsch",["Leichte Wanderung zur Gletscherzunge, Tafeln zeigen den Eisrückgang.","Easy walk to the glacier snout, signs show the ice retreat.","Passeggiata facile fino alla lingua del ghiacciaio.","Balade facile jusqu'au front du glacier."]],
+  ["t8","s","Alp Languard",["Sessellift ab dem Dorf, oft Steinböcke. Weiter zur Segantini-Hütte.","Chairlift from the village, ibex often seen. On to the Segantini hut.","Seggiovia dal paese, spesso stambecchi. Poi alla capanna Segantini.","Télésiège depuis le village, souvent des bouquetins. Puis cabane Segantini."]],
+  ["t9","s","Bernina Express",["Mit der Rhätischen Bahn über den Berninapass bis Tirano – UNESCO-Welterbe.","Rhaetian Railway over the Bernina Pass to Tirano – UNESCO World Heritage.","Con la Ferrovia Retica sul Bernina fino a Tirano – patrimonio UNESCO.","Le Chemin de fer rhétique par le col de la Bernina jusqu'à Tirano – UNESCO."],"https://www.rhb.ch"],
+  ["t10","s","Oberengadiner Seen",["Baden, Paddeln, Kitesurfen am Silvaplanersee.","Swimming, paddling, kitesurfing on Lake Silvaplana.","Bagno, paddle, kitesurf sul lago di Silvaplana.","Baignade, paddle, kitesurf au lac de Silvaplana."]]
+];
+const PAGES = {
+  ankunft: l => `<ol class="steps">
+    ${[["Adresse","Address","Indirizzo","Adresse","Chesa Romana, Curtins 10, 7504 Pontresina – gegenüber dem Bahnhof Pontresina Surovas.","Chesa Romana, Curtins 10, 7504 Pontresina – opposite Pontresina Surovas station.","Chesa Romana, Curtins 10, 7504 Pontresina – di fronte alla stazione Pontresina Surovas.","Chesa Romana, Curtins 10, 7504 Pontresina – en face de la gare de Pontresina Surovas."],
+       ["Hauseingang","Main entrance","Ingresso principale","Entrée principale","Die Haupteingangstür ist von 8.00 bis 17.30 Uhr offen. Später bitte bei «Henning» klingeln – die Tür öffnet automatisch.","The main door is open from 8:00 to 17:30. Later, please ring «Henning» – the door opens automatically.","Il portone è aperto dalle 8.00 alle 17.30. Più tardi suonare «Henning» – la porta si apre automaticamente.","La porte principale est ouverte de 8 h à 17 h 30. Plus tard, sonnez chez «Henning» – la porte s'ouvre automatiquement."],
+       ["Wohnungstür mit Nuki","Apartment door (Nuki)","Porta dell'appartamento (Nuki)","Porte de l'appartement (Nuki)","Ihren persönlichen Zugangscode erhalten Sie vor der Anreise per Nachricht. Im weissen Körbchen in der Garderobe liegen die Schlüssel für Wohnung, Garage und Hauseingang.","You receive your personal access code by message before arrival. Keys for apartment, garage and main door are in the white basket in the hallway.","Riceverete il vostro codice personale per messaggio prima dell'arrivo. Le chiavi di appartamento, garage e portone sono nel cestino bianco del guardaroba.","Vous recevez votre code personnel par message avant l'arrivée. Les clés de l'appartement, du garage et de l'entrée sont dans la corbeille blanche du vestiaire."],
+       ["Parkplatz Nr. 29","Parking space no. 29","Posto auto n. 29","Place de parc n° 29","Gratis in der Tiefgarage reserviert. Das Garagentor öffnen Sie mit dem Hausschlüssel. Ski, Skischuhe und Velos in den Raum neben der Garageneinfahrt.","Free and reserved in the underground garage. Open the garage door with the house key. Skis, ski boots and bikes go in the room next to the garage entrance.","Gratuito e riservato nel garage sotterraneo. Il portone si apre con la chiave di casa. Sci, scarponi e bici nel locale accanto all'ingresso del garage.","Gratuite et réservée au garage souterrain. La porte s'ouvre avec la clé de la maison. Skis, chaussures et vélos dans le local à côté de l'entrée du garage."],
+       ["Lift in den 5. Stock","Lift to the 5th floor","Ascensore al 5° piano","Ascenseur au 5e étage","Maisonette im Dachgeschoss. Oben: Doppelzimmer (1.80 m), Einzelzimmer, Bad mit Wanne.","Top-floor maisonette. Upstairs: double room (1.80 m), single room, bathroom with tub.","Mansarda su due piani. Sopra: camera doppia (1,80 m), camera singola, bagno con vasca.","Duplex sous les toits. En haut : chambre double (1,80 m), chambre simple, salle de bain avec baignoire."],
+       ["An- und Abreise","Arrival & departure","Arrivo & partenza","Arrivée & départ","Jeweils am Samstag.","On Saturdays.","Il sabato.","Le samedi."]
+      ].map(s=>`<li><b>${s[l]}</b>${s[4+l]}</li>`).join("")}
+  </ol>` + cards([
+    [["Mit dem Zug","By train","In treno","En train"],["Ab Zürich HB rund 3 Stunden, mit der Rhätischen Bahn über Chur (Albula) oder Landquart–Vereina. Bahnhof Surovas (Halt auf Verlangen!) 4 Min. zu Fuss, Bahnhof Pontresina 18 Min.","About 3 hours from Zurich HB via Chur (Albula line) or Landquart–Vereina. Surovas station (request stop!) is a 4-min walk, Pontresina station 18 min.","Circa 3 ore da Zurigo HB via Coira (Albula) o Landquart–Vereina. Stazione Surovas (fermata a richiesta!) a 4 min a piedi, stazione di Pontresina 18 min.","Environ 3 h depuis Zurich HB via Coire (Albula) ou Landquart–Vereina. Gare de Surovas (arrêt sur demande !) à 4 min à pied, gare de Pontresina 18 min."],0,"https://www.sbb.ch"],
+    [["Mit dem Auto","By car","In auto","En voiture"],["Von St. Moritz/Samedan beim Kreisel auf der Route 29 Richtung Pontresina. Nach 3,9 km scharf links in die Via Maistra, vor der Rominger Holzmanufaktur nochmals scharf links in die Curtins, durch die Unterführung und gleich rechts.","From St. Moritz/Samedan take route 29 at the roundabout towards Pontresina. After 3.9 km turn sharp left into Via Maistra, then sharp left again into Curtins before the Rominger wood workshop, through the underpass and immediately right.","Da St. Moritz/Samedan alla rotonda prendere la strada 29 per Pontresina. Dopo 3,9 km girare a sinistra in Via Maistra, poi ancora a sinistra in Curtins prima della falegnameria Rominger, passare il sottopasso e subito a destra.","Depuis St-Moritz/Samedan, au giratoire prendre la route 29 vers Pontresina. Après 3,9 km tourner à gauche dans la Via Maistra, puis à nouveau à gauche dans Curtins avant la menuiserie Rominger, passer le passage inférieur et tout de suite à droite."],0,Q("Curtins 10, 7504 Pontresina")],
+    [["Autoverlad Vereina","Vereina car train","Treno navetta Vereina","Train-auto Vereina"],["Ohne Passfahrt: Auto in Klosters-Selfranga auf den Zug verladen. Strassenzustand: strassen.gr.ch","Avoid the passes: load your car onto the train at Klosters-Selfranga. Road conditions: strassen.gr.ch","Senza valichi: caricare l'auto sul treno a Klosters-Selfranga. Stato delle strade: strassen.gr.ch","Sans col : chargez la voiture sur le train à Klosters-Selfranga. État des routes : strassen.gr.ch"],0,"https://www.vereina.ch"],
+    [["Mit dem Bus","By bus","In bus","En bus"],["Haltestelle «Pontresina Post», 6 Min. zu Fuss – Linien 1, 2, 10, 701 und 705.","Stop «Pontresina Post», 6-min walk – lines 1, 2, 10, 701 and 705.","Fermata «Pontresina Post», 6 min a piedi – linee 1, 2, 10, 701 e 705.","Arrêt «Pontresina Post», 6 min à pied – lignes 1, 2, 10, 701 et 705."]]
+  ], l),
+  wohnung: l => cards([
+    [["WLAN","Wi-Fi","Wi-Fi","Wi-Fi"],["Netzname und Passwort stehen auf dem Aufkleber am iPad.","Network name and password are on the sticker on the iPad.","Nome della rete e password sono sull'adesivo dell'iPad.","Le nom du réseau et le mot de passe figurent sur l'autocollant de l'iPad."]],
+    [["Jura-Kaffeemaschine","Jura coffee machine","Macchina Jura","Machine à café Jura"],["Vollautomat statt Kapseln – der Umwelt zuliebe. Bohnen für die ersten Tassen stehen bereit, gerne Ihre Lieblingsbohnen mitbringen.","Bean-to-cup instead of capsules – for the environment. Beans for the first cups are ready; feel free to bring your favourite beans.","Macchina automatica invece delle capsule – per l'ambiente. Chicchi per le prime tazze già pronti; portate pure i vostri preferiti.","Machine automatique plutôt que capsules – pour l'environnement. Grains pour les premières tasses fournis ; apportez vos grains préférés."]],
+    [["Bettwäsche & Tücher","Bed linen & towels","Biancheria & asciugamani","Linge de lit & serviettes"],["Betten sind frisch bezogen, Frottee- und Küchentücher liegen bereit.","Beds are made up; bath and kitchen towels are provided.","I letti sono pronti; asciugamani e strofinacci sono a disposizione.","Les lits sont faits ; serviettes et linges de cuisine sont fournis."]],
+    [["Cheminée","Fireplace","Camino","Cheminée"],["Holz ist inbegriffen. Bitte nur Hartholz (Eiche, Buche) verwenden und vor der Abreise wieder auffüllen.","Firewood is included. Please use hardwood only (oak, beech) and refill before you leave.","La legna è inclusa. Usare solo legno duro (quercia, faggio) e rifornire prima di partire.","Le bois est inclus. Uniquement du bois dur (chêne, hêtre), à remettre avant le départ."]],
+    [["Schiebetür Wohnzimmer","Living-room sliding door","Porta scorrevole soggiorno","Porte coulissante du séjour"],["Kurzes Video zur Bedienung:","Short video on how it works:","Breve video sull'uso:","Courte vidéo explicative :"],0,"https://www.youtube.com/results?search_query=Bedienung+Schiebet%C3%BCre+Dietmar+Ritterbecks"],
+    [["Waschen","Laundry","Lavanderia","Lessive"],["Waschmaschine und Trockner im Gäste-WC beim Entrée.","Washer and dryer in the guest toilet by the entrance.","Lavatrice e asciugatrice nel WC ospiti all'ingresso.","Lave-linge et sèche-linge dans les WC invités à l'entrée."]],
+    [["Heizung","Heating","Riscaldamento","Chauffage"],["Fussbodenheizung – bitte nicht abstellen. Lieber kurz und kräftig lüften.","Underfloor heating – please leave it on. Air the rooms briefly but fully.","Riscaldamento a pavimento – non spegnerlo. Arieggiare brevemente.","Chauffage au sol – ne pas le couper. Aérer brièvement."]],
+    [["Spiele & Bücher","Games & books","Giochi & libri","Jeux & livres"],["Brettspiele und Bücher stehen für Sie bereit.","Board games and books are there for you.","Giochi da tavolo e libri a vostra disposizione.","Jeux de société et livres à votre disposition."]],
+    [["Hausregeln","House rules","Regole della casa","Règlement"],["Max. 3 Gäste · Keine Haustiere · Ruhezeit 22–7 Uhr · Keine Partys · Keine Ski- oder Wanderschuhe in der Wohnung, bitte Hausschuhe","Max. 3 guests · No pets · Quiet hours 10 pm–7 am · No parties · No ski or hiking boots inside, please wear slippers","Max. 3 ospiti · Niente animali · Silenzio 22–7 · Niente feste · Niente scarponi in casa, usare le pantofole","3 personnes max. · Pas d'animaux · Calme 22 h–7 h · Pas de fêtes · Pas de chaussures de ski ou de marche à l'intérieur, chaussons s.v.p."]],
+    [["Rauchen","Smoking","Fumo","Fumer"],["Nichtraucherwohnung. Rauchen nur auf dem Balkon – der Aschenbecher steht auf der Ablage. Bitte Balkontür dabei schliessen und nicht aus dem Fenster rauchen.","Non-smoking apartment. Smoking only on the balcony – the ashtray is on the shelf. Please close the balcony door and do not smoke out of the window.","Appartamento non fumatori. Fumare solo sul balcone – il posacenere è sulla mensola. Chiudere la porta del balcone e non fumare dalla finestra.","Logement non-fumeur. Fumer uniquement sur le balcon – le cendrier est sur l'étagère. Fermez la porte du balcon et ne fumez pas par la fenêtre."]],
+    [["Mit Kindern","With children","Con bambini","Avec des enfants"],["Kinder sind willkommen. Treppe mit Geländer, aber nicht kindersicher; dazu Cheminée und Balkon im 5. Stock – bitte beaufsichtigen. Keine Babyausstattung vorhanden.","Children are welcome. Stairs have a railing but are not child-proof; also fireplace and 5th-floor balcony – please supervise. No baby equipment.","I bambini sono benvenuti. Scala con ringhiera ma non a prova di bambino; inoltre camino e balcone al 5° piano – sorvegliare. Nessuna attrezzatura per neonati.","Enfants bienvenus. Escalier avec rampe mais non sécurisé ; cheminée et balcon au 5e étage – surveillez-les. Pas d'équipement bébé."]],
+    [["In der Nähe","Nearby","Nelle vicinanze","À proximité"],["Loipe 100 m · Bach 200 m · Skischule und Restaurants 300 m · Bahnhof 400 m · Laden 600 m · Dorfzentrum 1 km","Cross-country trail 100 m · Stream 200 m · Ski school & restaurants 300 m · Station 400 m · Shop 600 m · Village centre 1 km","Pista di fondo 100 m · Ruscello 200 m · Scuola sci e ristoranti 300 m · Stazione 400 m · Negozio 600 m · Centro 1 km","Piste de fond 100 m · Ruisseau 200 m · École de ski et restaurants 300 m · Gare 400 m · Magasin 600 m · Centre 1 km"]]
+  ],l),
+  ausfluege: l => list("trips",l),
+  essen: l => list("food",l) + `<p class="more">${UI.moreR[l]} <a href="https://www.pontresina.ch">pontresina.ch</a></p>`,
+  einkauf: l => list("shop",l),
+  musik: l => cards([
+    [["Fernsehen","Watching TV","Televisione","Télévision"],["1. Fernseher und TV-Box einschalten. 2. Mind. 30 Sek. warten, bis die grüne Lampe der Box leuchtet. 3. Mit der Box-Fernbedienung «yallo TV» wählen und bestätigen. 4. «TV» wählen – über 280 Sender inkl. 7 Tage Replay.","1. Switch on the TV and the TV box. 2. Wait at least 30 sec. until the box's green light is on. 3. With the box remote, select «yallo TV» and confirm. 4. Select «TV» – over 280 channels incl. 7-day replay.","1. Accendere TV e box. 2. Attendere almeno 30 sec. finché la luce verde del box è accesa. 3. Con il telecomando del box scegliere «yallo TV» e confermare. 4. Scegliere «TV» – oltre 280 canali, replay di 7 giorni.","1. Allumer la TV et le boîtier. 2. Attendre au moins 30 s que le voyant vert s'allume. 3. Avec la télécommande du boîtier, choisir «yallo TV» et valider. 4. Choisir «TV» – plus de 280 chaînes, replay 7 jours."]],
+    [["Musikanlage verbinden","Connect the sound system","Collegare l'impianto audio","Connecter la chaîne"],["1. Panasonic-Musikanlage einschalten und auf Bluetooth stellen. 2. iPad oder Handy: Einstellungen › Bluetooth. 3. Panasonic antippen – fertig.","1. Switch on the Panasonic sound system and select Bluetooth. 2. iPad or phone: Settings › Bluetooth. 3. Tap Panasonic – done.","1. Accendere l'impianto Panasonic e selezionare Bluetooth. 2. iPad o telefono: Impostazioni › Bluetooth. 3. Toccare Panasonic – fatto.","1. Allumer la chaîne Panasonic et choisir Bluetooth. 2. iPad ou téléphone : Réglages › Bluetooth. 3. Toucher Panasonic – c'est fait."]],
+    [["Leise ab 22 Uhr","Quiet after 10 pm","Silenzio dopo le 22","Calme après 22 h"],["Die Nachbarn danken es Ihnen.","Your neighbours will thank you.","I vicini ringraziano.","Les voisins vous remercient."]],
+    [["Radio SRF","Radio SRF","Radio SRF","Radio SRF"],["SRF 1, SRF 3, Musikwelle und mehr.","SRF 1, SRF 3, Musikwelle and more.","SRF 1, SRF 3, Musikwelle e altro.","SRF 1, SRF 3, Musikwelle et plus."],0,"https://www.srf.ch/audio"],
+    [["RSI · RTS","RSI · RTS","RSI · RTS","RSI · RTS"],["Radio auf Italienisch und Französisch.","Radio in Italian and French.","Radio in italiano e francese.","Radio en italien et en français."],0,"https://www.rsi.ch/audio"],
+    [["Radio Rumantsch","Radio Rumantsch","Radio Rumantsch","Radio Rumantsch"],["Rätoromanisch – die Sprache des Engadins.","Romansh – the language of the Engadine.","Romancio – la lingua dell'Engadina.","Romanche – la langue de l'Engadine."],0,"https://www.rtr.ch/audio"]
+  ],l),
+  wetter: l => cards([
+    [["Wetter","Weather","Meteo","Météo"],["Lokale Prognose.","Local forecast.","Previsioni locali.","Prévisions locales."],0,"https://www.meteoschweiz.admin.ch"],
+    [["Fahrplan","Timetable","Orario","Horaire"],["Zug und Bus ab Pontresina.","Train and bus from Pontresina.","Treno e bus da Pontresina.","Train et bus depuis Pontresina."],0,"https://www.sbb.ch"],
+    [["Rhätische Bahn","Rhaetian Railway","Ferrovia Retica","Chemin de fer rhétique"],["Bernina Express und Albula-Linie.","Bernina Express and Albula line.","Bernina Express e linea dell'Albula.","Bernina Express et ligne de l'Albula."],0,"https://www.rhb.ch"],
+    [["Pisten, Loipen, Bahnen","Slopes, trails, lifts","Piste e impianti","Pistes et remontées"],["Aktuelle Öffnungen in der Region.","Current openings in the region.","Aperture attuali nella regione.","Ouvertures actuelles dans la région."],0,"https://www.engadin.ch"]
+  ],l),
+  notfall: l => `<div class="sos">${[["144",["Sanität","Ambulance","Ambulanza","Ambulance"]],["117",["Polizei","Police","Polizia","Police"]],["118",["Feuerwehr","Fire","Pompieri","Pompiers"]],["1414",["Rega","Air rescue","Rega","Rega"]]].map(x=>`<div><b>${x[0]}</b>${x[1][l]}</div>`).join("")}</div>` + cards([
+    [["Spital","Hospital","Ospedale","Hôpital"],["Spital Oberengadin, Samedan – ca. 10 Min. mit dem Auto.","Spital Oberengadin, Samedan – about 10 min by car.","Spital Oberengadin, Samedan – circa 10 min in auto.","Spital Oberengadin, Samedan – env. 10 min en voiture."],0,Q("Spital Oberengadin Samedan")],
+    [["Vergiftung","Poisoning","Avvelenamento","Intoxication"],["Tox Info Suisse: 145","Tox Info Suisse: 145","Tox Info Suisse: 145","Tox Info Suisse : 145"]],
+    [["Ihr Gastgeber","Your host","Il vostro host","Votre hôte"],["Bertram Henning · +41 79 601 57 81 · Anruf, SMS oder WhatsApp","Bertram Henning · +41 79 601 57 81 · call, text or WhatsApp","Bertram Henning · +41 79 601 57 81 · chiamata, SMS o WhatsApp","Bertram Henning · +41 79 601 57 81 · appel, SMS ou WhatsApp"],0,"https://wa.me/41796015781"],
+    [["Hauswartung · Ersatzschlüssel","Caretaker · spare key","Custode · chiave di riserva","Concierge · clé de secours"],["Frau Ana Corona · 081 842 60 74 oder 079 569 32 65","Ms Ana Corona · +41 81 842 60 74 or +41 79 569 32 65","Sig.ra Ana Corona · +41 81 842 60 74 o +41 79 569 32 65","Mme Ana Corona · +41 81 842 60 74 ou +41 79 569 32 65"]],
+    [["Nur im Notfall: Nachbar","Emergency only: neighbour","Solo in emergenza: vicino","Urgence uniquement : voisin"],["Bruno Kellenberger, 2. Stock – bitte nur klingeln, wenn es dringend ist und weder der Gastgeber noch Frau Corona erreichbar sind. Er hat einen Schlüssel und hilft weiter.","Bruno Kellenberger, 2nd floor – please ring only if it is urgent and neither your host nor Ms Corona can be reached. He has a key and can help.","Bruno Kellenberger, 2° piano – suonare solo se è urgente e né l'host né la sig.ra Corona sono raggiungibili. Ha una chiave e può aiutare.","Bruno Kellenberger, 2e étage – sonnez uniquement en cas d'urgence si ni l'hôte ni Mme Corona ne sont joignables. Il a une clé et peut aider."]],
+    [["Probleme in der Wohnung?","Problem in the apartment?","Problemi in casa?","Un souci dans le logement ?"],["Heizung, Wasser, Tür: bitte zuerst den Gastgeber kontaktieren.","Heating, water, door: please contact your host first.","Riscaldamento, acqua, porta: contattate prima l'host.","Chauffage, eau, porte : contactez d'abord l'hôte."]]
+  ],l),
+  abreise: l => cards([
+    [["Vor dem Gehen","Before you leave","Prima di partire","Avant de partir"],["Geschirr versorgen · Kühlschrank und Cheminée wie vorgefunden · Holz auffüllen · Abfall entsorgen · Fenster und Balkontür schliessen · Licht aus","Put the dishes away · Leave fridge and fireplace as found · Refill firewood · Take out the rubbish · Close windows and balcony door · Lights off","Riporre le stoviglie · Frigo e camino come trovati · Rifornire la legna · Portare via i rifiuti · Chiudere finestre e balcone · Luci spente","Ranger la vaisselle · Frigo et cheminée comme à l'arrivée · Remettre du bois · Sortir les déchets · Fermer fenêtres et balcon · Éteindre"]],
+    [["Abschliessen","Locking up","Chiudere a chiave","Fermer à clé"],["Schlüssel im Körbchen in der Wohnung lassen. Schloss innen 2× zu und wieder auf drehen, dann aussen mit der Nuki-App schliessen. Auto aus der Garage holen.","Leave the key in the basket in the apartment. Turn the inside lock twice closed and open again, then lock from outside with the Nuki app. Take your car out of the garage.","Lasciare la chiave nel cestino in casa. Girare la serratura interna 2 volte chiusa e riaperta, poi chiudere da fuori con l'app Nuki. Ritirare l'auto dal garage.","Laisser la clé dans la corbeille de l'appartement. Tourner la serrure intérieure 2× fermée puis rouverte, puis fermer de l'extérieur avec l'app Nuki. Sortir la voiture du garage."]],
+    [["Später abreisen?","Later departure?","Partenza più tardi?","Départ plus tard ?"],["Späterer Check-out oder früherer Check-in auf Anfrage – je nach Belegung.","Late check-out or early check-in on request – subject to availability.","Check-out posticipato o check-in anticipato su richiesta, secondo disponibilità.","Départ tardif ou arrivée anticipée sur demande, selon disponibilité."]],
+    [["Hat es Ihnen gefallen?","Did you enjoy your stay?","Vi è piaciuto il soggiorno?","Votre séjour vous a plu ?"],["Eine Bewertung auf Ihrer Buchungsplattform hilft uns sehr. Grazcha fich – vielen Dank!","A review on your booking platform helps us a lot. Grazcha fich – thank you!","Una recensione sulla piattaforma di prenotazione ci aiuta molto. Grazcha fich – grazie!","Un avis sur votre plateforme de réservation nous aide beaucoup. Grazcha fich – merci !"]],
+    [["Wünsche & Verbesserungen","Wishes & suggestions","Desideri & suggerimenti","Souhaits & suggestions"],["Etwas gefehlt oder kaputt? Sagen Sie es uns direkt – wir kümmern uns.","Something missing or broken? Tell us directly – we'll take care of it.","Manca qualcosa o è rotto? Ditecelo direttamente.","Quelque chose manque ou est cassé ? Dites-le-nous directement."]]
+  ],l)
+};
+
+let lang = "de", favs = [], filt = {trips:null, food:"all", shop:"all"};
+try { favs = JSON.parse(localStorage.getItem("pf_favs") || "[]"); lang = localStorage.getItem("pf_lang") || ""; } catch(e) {}
+if (L.indexOf(lang) < 0) { const n = (navigator.language || "de").slice(0,2); lang = L.indexOf(n) >= 0 ? n : (n === "rm" ? "de" : "en"); }
+const li = () => L.indexOf(lang);
+const save = () => { try { localStorage.setItem("pf_favs", JSON.stringify(favs)); localStorage.setItem("pf_lang", lang); } catch(e) {} };
+
+function cards(arr, l) {
+  return `<div class="cards">${arr.map(c => `<div class="c"><h3>${c[0][l]}</h3><p>${c[1][l]}${c[2] ? ` <span class="todo">– ${UI.todo[l]}</span>` : ""}</p>${c[3] ? `<div class="links"><a href="${c[3]}">${UI.web[l]}</a></div>` : ""}</div>`).join("")}</div>`;
+}
+function place(p, l, kind) {
+  const isT = kind === "trips";
+  const name = isT ? p[2] : p[2], txt = isT ? p[3][l] : p[4][l], url = isT ? p[4] : p[5];
+  const addr = isT ? "" : `<div class="addr">${p[3]}</div>`;
+  const tag = isT ? "" : `<span class="tag">${p[1]}</span>`;
+  const on = favs.indexOf(p[0]) >= 0;
+  return `<div class="c"><button class="fav" data-f="${p[0]}" aria-label="favorite">${on ? "♥" : "♡"}</button><h3>${name}</h3><p>${txt}</p>${addr}${tag}<div class="links"><a href="${Q(name + " " + (isT ? "Engadin" : p[3] + " Pontresina"))}">${UI.map[l]}</a>${url ? `<a href="${url}">${UI.web[l]}</a>` : ""}</div></div>`;
+}
+function list(kind, l) {
+  const data = kind === "trips" ? TRIPS : kind === "food" ? FOOD : SHOP;
+  let chips, items;
+  if (kind === "trips") {
+    if (!filt.trips) { const m = new Date().getMonth(); filt.trips = (m >= 4 && m <= 9) ? "s" : "w"; }
+    chips = [["w",UI.winter[l]],["s",UI.summer[l]],["r",UI.rain[l]],["fav",UI.favs[l]]];
+    items = filt.trips === "fav" ? data.filter(p => favs.indexOf(p[0]) >= 0) : data.filter(p => p[1] === filt.trips);
+  } else {
+    chips = [["all",UI.all[l]],["fav",UI.favs[l]]];
+    items = filt[kind] === "fav" ? data.filter(p => favs.indexOf(p[0]) >= 0) : data;
+  }
+  const cur = filt[kind];
+  const ch = `<div class="chips">${chips.map(c => `<button data-k="${kind}" data-v="${c[0]}" class="${cur === c[0] ? "on" : ""}">${c[1]}</button>`).join("")}${cur === "fav" && items.length ? `<button data-clear="1">${UI.clear[l]}</button>` : ""}</div>`;
+  return ch + (items.length ? `<div class="cards">${items.map(p => place(p, l, kind)).join("")}</div>` : `<p class="empty">${UI.nofav[l]}</p>`);
+}
+
+function render() {
+  const l = li();
+  document.documentElement.lang = lang;
+  document.querySelectorAll("[data-t]").forEach(e => { e.textContent = UI[e.dataset.t][l]; });
+  document.getElementById("langs").innerHTML = L.map(x => `<button data-lang="${x}" class="${x === lang ? "on" : ""}">${LN[x]}</button>`).join("");
+  document.getElementById("tiles").innerHTML = TILES.map(t => `<a class="tile" href="#${t[0]}"><span class="ico"><svg viewBox="0 0 24 24">${t[1]}</svg></span><div><h3>${t[2][l]}</h3><p>${t[3][l]}</p></div></a>`).join("");
+  route(false);
+  tick();
+}
+function route(scroll) {
+  const h = (location.hash || "").replace("#", "");
+  const t = TILES.filter(x => x[0] === h)[0];
+  document.getElementById("v-start").classList.toggle("on", !t);
+  document.getElementById("v-page").classList.toggle("on", !!t);
+  if (t) {
+    document.getElementById("ptitle").textContent = t[2][li()];
+    document.getElementById("pbody").innerHTML = PAGES[h](li());
+  }
+  if (scroll !== false) window.scrollTo(0, 0);
+}
+function tick() {
+  const d = new Date(), loc = {de:"de-CH",en:"en-GB",it:"it-CH",fr:"fr-CH"}[lang];
+  document.getElementById("time").textContent = d.toLocaleTimeString(loc, {hour:"2-digit", minute:"2-digit"});
+  document.getElementById("date").textContent = d.toLocaleDateString(loc, {weekday:"long", day:"numeric", month:"long"});
+}
+
+document.addEventListener("click", e => {
+  const b = e.target.closest("button");
+  if (!b) return;
+  if (b.dataset.lang) { lang = b.dataset.lang; save(); render(); }
+  else if (b.dataset.f) { const i = favs.indexOf(b.dataset.f); if (i >= 0) favs.splice(i, 1); else favs.push(b.dataset.f); save(); route(false); }
+  else if (b.dataset.k) { filt[b.dataset.k] = b.dataset.v; route(false); }
+  else if (b.dataset.clear) { favs = []; save(); route(false); }
+});
+window.addEventListener("hashchange", () => route(true));
+render();
+setInterval(tick, 20000);
+
+/* Kiosk: nach 3 Min. ohne Berührung zurück zur Startseite */
+let idle;
+const reset = () => { clearTimeout(idle); idle = setTimeout(() => { if (location.hash) location.hash = ""; }, 180000); };
+["touchstart","click"].forEach(ev => document.addEventListener(ev, reset, {passive:true}));
+reset();
+}
+</script>
+</body>
+</html>
