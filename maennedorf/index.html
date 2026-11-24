@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#14324a">
+<title>Gartenstudio Männedorf</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* Gartenstudio Männedorf – modern, hell, Zürichsee-Blau + Salbei. iOS-15-tauglich: kein :has(), kein light-dark() */
+:root{--bg:#f5f6f3;--card:#fff;--ink:#14212b;--soft:#5b6873;--lake:#1d5c86;--deep:#14324a;--sage:#8fae96;--sand:#e9e4da;--line:#e3e6e2;--acc:#e0795a}
+@media (prefers-color-scheme:dark){:root{--bg:#0e161d;--card:#16222c;--ink:#eef2f5;--soft:#a3b1bc;--line:#24323d;--sand:#1c2a35}}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16.5px/1.55 Inter,-apple-system,Helvetica,Arial,sans-serif;overflow-x:hidden;-webkit-text-size-adjust:100%}
+h1,h2,h3{font-family:Manrope,-apple-system,Helvetica,sans-serif;line-height:1.12;margin:0;letter-spacing:-.01em}
+a{color:inherit}
+button{font:inherit;cursor:pointer}
+/* Hero */
+.hero{position:relative;min-height:min(78vh,640px);color:#fff;display:flex;align-items:flex-end;overflow:hidden;background:var(--deep)}
+.slide{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.4s ease,transform 9s ease;transform:scale(1.06)}
+.slide.on{opacity:1;transform:scale(1)}
+.hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:75%;background:linear-gradient(180deg,rgba(20,50,74,0) 0%,rgba(20,50,74,.55) 45%,rgba(14,28,40,.92) 100%)}
+.htop{position:absolute;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:16px max(4vw,16px);z-index:2}
+.brand{font:800 15px/1 Manrope,sans-serif;letter-spacing:.18em;text-transform:uppercase;background:rgba(14,28,40,.45);padding:10px 14px;border-radius:30px;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.langs{display:flex}
+.langs button{background:rgba(255,255,255,.88);color:var(--deep);border:0;border-radius:22px;min-width:46px;min-height:42px;margin-left:6px;font-weight:600}
+.langs button.on{background:var(--acc);color:#fff}
+.hin{position:relative;z-index:2;padding:0 max(4vw,18px) 34px;max-width:1240px;width:100%;margin:0 auto}
+.hi{font:700 15px Manrope,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#bfe0d0}
+.hero h1{font-size:clamp(34px,6vw,60px);font-weight:800;margin:8px 0 10px}
+.hero p{margin:0;max-width:36em;color:#dbe6ee;font-size:17.5px}
+.facts{display:flex;flex-wrap:wrap;margin-top:18px}
+.facts span{border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.1);border-radius:30px;padding:7px 14px;margin:0 8px 8px 0;font-size:14.5px;font-weight:600}
+.dots{display:flex;margin-top:10px}
+.dots i{width:22px;height:4px;border-radius:2px;background:rgba(255,255,255,.35);margin-right:6px}
+.dots i.on{background:#fff}
+/* Kacheln */
+.band{padding:28px max(4vw,16px) 12px;max-width:1240px;margin:0 auto}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.tile{display:flex;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;text-decoration:none;min-height:96px;transition:transform .15s ease,box-shadow .15s ease;-webkit-tap-highlight-color:transparent}
+.tile:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(20,50,74,.10)}
+.tile:active{transform:scale(.98)}
+.ico{flex:none;width:52px;height:52px;border-radius:16px;margin-right:14px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--lake),var(--deep))}
+.ico svg{width:28px;height:28px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.tile h3{font-size:19px}
+.tile p{margin:3px 0 0;color:var(--soft);font-size:14.5px;line-height:1.35}
+/* Unterseiten */
+.view{display:none}.view.on{display:block}
+.top{display:flex;align-items:center;flex-wrap:wrap;margin-bottom:18px}
+.back{font-weight:600;background:var(--deep);color:#fff;border:0;border-radius:24px;padding:11px 20px;min-height:46px;margin-right:16px;text-decoration:none}
+.top h2{font-size:32px}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.c{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px 20px;position:relative}
+.c h3{font-size:19px;margin:0 46px 6px 0}
+.c p{margin:0;color:var(--soft)}
+.addr{font-size:14.5px;margin-top:6px;color:var(--soft)}
+.tag{display:inline-block;margin-top:10px;font-size:13px;font-weight:600;color:var(--lake);background:var(--sand);padding:3px 10px;border-radius:12px}
+.links a{display:inline-block;margin:12px 10px 0 0;background:var(--lake);color:#fff;text-decoration:none;font-weight:600;padding:9px 18px;border-radius:22px;min-height:42px}
+.fav{position:absolute;top:12px;right:12px;width:42px;height:42px;border-radius:21px;border:1px solid var(--line);background:var(--bg);font-size:21px;line-height:1;color:var(--acc)}
+.chips{display:flex;flex-wrap:wrap;margin-bottom:14px}
+.chips button{border:2px solid var(--lake);background:transparent;color:var(--ink);padding:8px 17px;min-height:44px;border-radius:24px;margin:0 10px 8px 0;font-weight:600}
+.chips button.on{background:var(--lake);color:#fff}
+.steps{counter-reset:s;list-style:none;padding:0;margin:0 0 16px}
+.steps li{counter-increment:s;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px 18px 16px 72px;margin-bottom:12px;position:relative;color:var(--soft)}
+.steps li::before{content:counter(s);position:absolute;left:18px;top:16px;width:38px;height:38px;border-radius:19px;background:var(--acc);color:#fff;font:800 18px/38px Manrope,sans-serif;text-align:center}
+.steps b{display:block;font:700 18px Manrope,sans-serif;color:var(--ink);margin-bottom:2px}
+.steps a{color:var(--lake);font-weight:600}
+.gal{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.gal a{display:block;border-radius:16px;overflow:hidden;background:var(--sand);aspect-ratio:4/3}
+.gal img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s ease}
+.gal a:hover img{transform:scale(1.04)}
+.lb{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(8,16,22,.94);display:none;align-items:center;justify-content:center;z-index:20;padding:16px}
+.lb.on{display:flex}
+.lb img{max-width:100%;max-height:100%;border-radius:10px}
+.lb button{position:absolute;top:14px;right:14px;width:48px;height:48px;border-radius:24px;border:0;background:#fff;color:var(--deep);font-size:24px}
+.sos{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:14px}
+.sos a{background:var(--acc);color:#fff;border-radius:18px;padding:14px;text-align:center;text-decoration:none}
+.sos b{display:block;font:800 36px/1.1 Manrope,sans-serif}
+.more{margin-top:16px;color:var(--soft)}
+.empty{color:var(--soft);padding:20px 0}
+.foot{text-align:center;color:var(--soft);font-size:14px;padding:22px 16px 30px}
+@media (max-width:900px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.sos{grid-template-columns:repeat(2,minmax(0,1fr))}.gal{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){.hero{min-height:72vh}.hero::after{height:100%;background:linear-gradient(180deg,rgba(20,50,74,.15) 0%,rgba(20,50,74,.6) 40%,rgba(14,28,40,.94) 100%)}.brand{display:none}.htop{justify-content:flex-end;padding:12px}.langs button{min-width:42px;min-height:40px;margin-left:5px}.hi{color:#d4efe2}.grid,.cards{grid-template-columns:minmax(0,1fr)}.top h2{font-size:26px}.tile{min-height:84px}}
+@media (prefers-reduced-motion:reduce){.slide{transition:none;transform:none}}
+</style>
+</head>
+<body>
+
+<section class="view on" id="v-start">
+  <header class="hero" id="hero">
+    <img class="slide on" src="img/studio.jpg" alt="">
+    <img class="slide" src="img/bett.jpg" alt="" loading="lazy">
+    <img class="slide" src="img/sitzecke.jpg" alt="" loading="lazy">
+    <img class="slide" src="img/sofa.jpg" alt="" loading="lazy">
+    <img class="slide" src="img/fenster.jpg" alt="" loading="lazy">
+    <div class="htop"><div class="brand">Männedorf · Zürichsee</div><div class="langs" id="langs"></div></div>
+    <div class="hin">
+      <div class="hi" data-t="hi"></div>
+      <h1 data-t="title"></h1>
+      <p data-t="intro"></p>
+      <div class="facts" id="facts"></div>
+      <div class="dots" id="dots"></div>
+    </div>
+  </header>
+  <main class="band"><nav class="grid" id="tiles"></nav></main>
+</section>
+
+<section class="view band" id="v-page"><div class="top"><a class="back" href="#" data-t="back"></a><h2 id="ptitle"></h2></div><div id="pbody"></div></section>
+
+<div class="foot" data-t="foot"></div>
+<div class="lb" id="lb"><button aria-label="close">✕</button><img alt=""></div>
+
+<script>
+window.onerror=function(m,u,l,c){var d=document.createElement('div');d.style.cssText='position:fixed;left:0;right:0;bottom:0;background:#e0795a;color:#fff;padding:12px;font:16px sans-serif;z-index:99';d.textContent='Fehler: '+m+' (Zeile '+l+':'+c+')';document.body.appendChild(d);};
+</script>
+<script>
+(function(){
+"use strict";
+const L = ["de","en","it","fr"];
+const LN = {de:"DE",en:"EN",it:"IT",fr:"FR"};
+const ADDR = "Glärnischstrasse 123, 8708 Männedorf";
+/* Mehrsprachige Texte: [de, en, it, fr] */
+const UI = {
+  hi:["Grüezi & herzlich willkommen","Grüezi & welcome","Grüezi & benvenuti","Grüezi & bienvenue"],
+  title:["Ihr Gartenstudio in Männedorf","Your garden studio in Männedorf","Il vostro studio sul giardino a Männedorf","Votre studio côté jardin à Männedorf"],
+  intro:["Ruhig wohnen am Zürichsee – in 17 Minuten mit der S-Bahn in Zürich. Hier finden Sie alles zu Anreise, Studio, Ausflügen und Restaurants.","Quiet living on Lake Zurich – Zurich is 17 minutes away by S-Bahn. Here you'll find everything about arrival, the studio, outings and restaurants.","Tranquillità sul lago di Zurigo – Zurigo a 17 minuti con la S-Bahn. Qui trovate tutto su arrivo, studio, gite e ristoranti.","Au calme sur le lac de Zurich – Zurich à 17 minutes en S-Bahn. Vous trouverez ici tout sur l'arrivée, le studio, les excursions et les restaurants."],
+  facts:[["30 m²","1–2 Gäste","Bett 180 × 200","Parkplatz","Lift","WLAN"],["30 m²","1–2 guests","Bed 180 × 200","Parking","Lift","Wi-Fi"],["30 m²","1–2 ospiti","Letto 180 × 200","Parcheggio","Ascensore","Wi-Fi"],["30 m²","1–2 personnes","Lit 180 × 200","Parking","Ascenseur","Wi-Fi"]],
+  back:["‹ Zurück","‹ Back","‹ Indietro","‹ Retour"],
+  foot:["Gartenstudio · "+ADDR+" · Samira & Bertram Henning","Garden studio · "+ADDR+" · Samira & Bertram Henning","Studio sul giardino · "+ADDR+" · Samira & Bertram Henning","Studio côté jardin · "+ADDR+" · Samira & Bertram Henning"],
+  all:["Alle","All","Tutti","Tous"],
+  lake:["Am See","By the lake","Sul lago","Au bord du lac"],
+  nature:["Natur","Nature","Natura","Nature"],
+  city:["Städte","Towns","Città","Villes"],
+  rain:["Schlechtwetter","Rainy day","Maltempo","Mauvais temps"],
+  favs:["♥ Meine Favoriten","♥ My favourites","♥ I miei preferiti","♥ Mes favoris"],
+  nofav:["Noch keine Favoriten – tippen Sie auf ♡, um etwas zu merken.","No favourites yet – tap ♡ to save something.","Nessun preferito – toccate ♡ per salvare.","Pas encore de favoris – touchez ♡ pour enregistrer."],
+  clear:["Liste leeren","Clear list","Svuota lista","Vider la liste"],
+  map:["Karte","Map","Mappa","Carte"],
+  web:["Webseite","Website","Sito web","Site web"],
+  route:["Route","Directions","Percorso","Itinéraire"],
+  moreR:["Weitere Restaurants in Männedorf:","More restaurants in Männedorf:","Altri ristoranti a Männedorf:","Autres restaurants à Männedorf :"]
+};
+const TILES = [
+  ["ankunft",'<path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>',["Ankunft","Arrival","Arrivo","Arrivée"],["Adresse, Parkplatz, Schlüssel","Address, parking, key","Indirizzo, parcheggio, chiave","Adresse, parking, clé"]],
+  ["studio",'<path d="M3 18v-6a2 2 0 012-2h14a2 2 0 012 2v6M3 18h18M3 18v2M21 18v2M7 10V7a2 2 0 012-2h6a2 2 0 012 2v3"/>',["Studio & WLAN","Studio & Wi-Fi","Studio & Wi-Fi","Studio & Wi-Fi"],["Ausstattung, Garten, Regeln","Amenities, garden, rules","Dotazioni, giardino, regole","Équipement, jardin, règles"]],
+  ["fotos",'<rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="1.8"/><path d="M21 16l-5-5-8 8"/>',["Fotos","Photos","Foto","Photos"],["Das Studio in Bildern","The studio in pictures","Lo studio in immagini","Le studio en images"]],
+  ["ausfluege",'<path d="M2 18c2.5 0 2.5-2 5-2s2.5 2 5 2 2.5-2 5-2 2.5 2 5 2"/><path d="M5 13l5-8 4 5 2-3 3 6"/>',["Ausflüge","Outings","Gite","Excursions"],["See, Pfannenstiel, Zürich","Lake, Pfannenstiel, Zurich","Lago, Pfannenstiel, Zurigo","Lac, Pfannenstiel, Zurich"]],
+  ["essen",'<path d="M7 3v18M4 3v5a3 3 0 006 0V3M17 3c-2 2-3 5-3 8h3v10"/>',["Restaurants & Cafés","Restaurants & cafés","Ristoranti & caffè","Restaurants & cafés"],["Selbst auswählen und merken","Pick and save your own","Scegliete e salvate","Choisissez et gardez"]],
+  ["einkauf",'<path d="M3 4h2l2 12h12l2-8H6"/><circle cx="9" cy="20" r="1.5"/><circle cx="17" cy="20" r="1.5"/>',["Einkaufen","Shopping","Acquisti","Courses"],["Lebensmittel, Bäckerei","Groceries, bakery","Alimentari, panetteria","Épicerie, boulangerie"]],
+  ["unterwegs",'<rect x="5" y="3" width="14" height="14" rx="3"/><path d="M5 11h14M8 21l2-4M16 21l-2-4"/><circle cx="9" cy="14" r=".6"/><circle cx="15" cy="14" r=".6"/>',["Bahn, Schiff & Wetter","Train, boat & weather","Treno, battello & meteo","Train, bateau & météo"],["Fahrplan, Prognose","Timetable, forecast","Orari, previsioni","Horaires, prévisions"]],
+  ["notfall",'<path d="M12 3l9 16H3z"/><path d="M12 10v4M12 17h.01"/>',["Notfall & Kontakt","Emergency & contact","Emergenza & contatto","Urgence & contact"],["Nummern, Spital, Gastgeber","Numbers, hospital, hosts","Numeri, ospedale, host","Numéros, hôpital, hôtes"]],
+  ["abreise",'<path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 01-2 2H6a2 2 0 01-2-2V5a2 2 0 012-2h9"/>',["Abreise & Feedback","Departure & feedback","Partenza & feedback","Départ & avis"],["Checkliste, Bewertung","Checklist, review","Checklist, recensione","Check-list, avis"]]
+];
+const Q = s => "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(s);
+const R = s => "https://www.google.com/maps/dir/?api=1&destination=" + encodeURIComponent(s);
+/* Orte: id, Kategorie, Name, Adresse, [Text de,en,it,fr], Webseite */
+const FOOD = [
+  ["r1","Café · Bäckerei","Steiner Beck","Dammstrasse 22",["Bäckerei mit Café im Dorf – für Gipfeli, Kaffee und Znüni.","Bakery and café in the village – for croissants, coffee and a snack.","Panetteria con caffè in paese – per cornetti, caffè e spuntini.","Boulangerie-café au village – croissants, café et en-cas."]],
+  ["r2","Am See","Schiffstation","Seestrasse 206",["Direkt am Ufer beim Schiffsteg, unter Bäumen. Von März bis Oktober bei schönem Wetter offen.","Right on the shore by the boat landing, under the trees. Open March to October in good weather.","Sulla riva accanto all'imbarcadero, sotto gli alberi. Aperto da marzo a ottobre col bel tempo.","Au bord de l'eau près du débarcadère, sous les arbres. Ouvert de mars à octobre par beau temps."]],
+  ["r3","Aussicht","Restaurant Boldern","Boldernstrasse 83",["Hoch über dem Dorf mit Blick auf den See, frische saisonale Küche. Sonntags geschlossen.","High above the village with lake views, fresh seasonal cuisine. Closed on Sundays.","Sopra il paese con vista sul lago, cucina fresca di stagione. Chiuso la domenica.","Au-dessus du village avec vue sur le lac, cuisine fraîche de saison. Fermé le dimanche."]],
+  ["r4","Schweizer Küche","Restaurant Widenbad","Seidenhausweg 2",["Traditionelles Restaurant mit Schweizer Küche.","Traditional restaurant with Swiss cuisine.","Ristorante tradizionale con cucina svizzera.","Restaurant traditionnel, cuisine suisse."]],
+  ["r5","Pizza","Bahnhof-Post Pizzeria","Obstgartenweg 22",["Pizzeria beim Bahnhof – unkompliziert und beliebt.","Pizzeria by the station – easy-going and popular.","Pizzeria vicino alla stazione – semplice e apprezzata.","Pizzeria près de la gare – simple et appréciée."]],
+  ["r6","Burger","Big Burger","Seestrasse 197",["Burger-Diner an der Seestrasse.","Burger diner on Seestrasse by the lake.","Burger diner sulla Seestrasse.","Diner à burgers sur la Seestrasse."]],
+  ["r7","Asiatisch","Choi's","Kugelgasse 11",["Asiatische Küche im Dorfkern.","Asian cuisine in the village centre.","Cucina asiatica in centro.","Cuisine asiatique au centre du village."]],
+  ["r8","Ausflug","Restaurant Hochwacht","Pfannenstiel",["Ausflugsrestaurant beim Aussichtsturm auf dem Pfannenstiel – ideal nach einer Wanderung.","Country restaurant by the Pfannenstiel lookout tower – perfect after a hike.","Ristorante panoramico vicino alla torre del Pfannenstiel – ideale dopo un'escursione.","Restaurant d'excursion près de la tour du Pfannenstiel – idéal après une randonnée."]]
+];
+const SHOP = [
+  ["s1","Supermarkt","Coop Männedorf","Dammstrasse 18",["Supermarkt im Dorf für den täglichen Einkauf.","Supermarket in the village for everyday shopping.","Supermercato in paese per la spesa quotidiana.","Supermarché au village pour les courses."]],
+  ["s2","Laden","Volg Männedorf","Allenbergstrasse 2",["Kleiner Dorfladen für das Nötigste.","Small village shop for the essentials.","Piccolo negozio per l'essenziale.","Petite épicerie pour l'essentiel."]],
+  ["s3","Bäckerei","Steiner Beck","Dammstrasse 22",["Frisches Brot und Gebäck, mit Café.","Fresh bread and pastries, with café.","Pane e dolci freschi, con caffè.","Pain et pâtisseries frais, avec café."]],
+  ["s4","Apotheke","Apotheke Männedorf","Männedorf",["Nächste Apotheke auf der Karte anzeigen.","Show the nearest pharmacy on the map.","Mostra la farmacia più vicina sulla mappa.","Afficher la pharmacie la plus proche."]]
+];
+/* Ausflüge: id, Kategorie (l=See, n=Natur, c=Städte, r=Regen), Name, [Text], Webseite, Kartensuche */
+const TRIPS = [
+  ["t1","l","Seeufer Männedorf",["8 Minuten zu Fuss: Spazieren, Baden im Sommer, Sonnenuntergang über dem See.","8-minute walk: strolls, summer swimming, sunsets over the lake.","8 minuti a piedi: passeggiate, bagno d'estate, tramonti sul lago.","8 min à pied : promenade, baignade en été, couchers de soleil sur le lac."],0,"Schiffstation Männedorf"],
+  ["t2","l","Schifffahrt Zürichsee",["Ab dem Schiffsteg Männedorf mit dem Kursschiff nach Zürich oder Rapperswil – Sommer wie Winter ein Erlebnis.","From the Männedorf landing stage by lake boat to Zurich or Rapperswil – lovely in summer and winter.","Dall'imbarcadero di Männedorf in battello verso Zurigo o Rapperswil – bello d'estate e d'inverno.","Du débarcadère de Männedorf en bateau vers Zurich ou Rapperswil – agréable été comme hiver."],"https://www.zsg.ch","Schiffstation Männedorf"],
+  ["t3","n","Pfannenstiel & Hochwacht",["Wander- und Velogebiet direkt hinter dem Dorf. Vom Aussichtsturm Hochwacht sehen Sie Zürichsee und Greifensee.","Hiking and cycling area right behind the village. The Hochwacht tower overlooks Lake Zurich and Lake Greifensee.","Zona escursionistica e ciclabile alle spalle del paese. Dalla torre Hochwacht si vedono il lago di Zurigo e il Greifensee.","Région de randonnée et de vélo juste derrière le village. La tour Hochwacht domine les lacs de Zurich et de Greifensee."],0,"Hochwacht Pfannenstiel"],
+  ["t4","n","Panoramaweg Pfannenstiel",["Aussichtsreicher Höhenweg über dem See mit Blick bis in die Glarner Alpen – auch in Etappen.","Scenic ridge trail above the lake with views to the Glarus Alps – can be done in stages.","Sentiero panoramico sopra il lago con vista sulle Alpi glaronesi – anche a tappe.","Sentier panoramique au-dessus du lac, vue jusqu'aux Alpes glaronaises – faisable par étapes."],0,"Panoramaweg Pfannenstiel"],
+  ["t5","n","Boldern",["20 Minuten zu Fuss bergauf – Aussicht über den ganzen See, mit Restaurant.","20 minutes' walk uphill – views over the whole lake, with restaurant.","20 minuti a piedi in salita – vista su tutto il lago, con ristorante.","20 min à pied en montée – vue sur tout le lac, avec restaurant."],0,"Boldern Männedorf"],
+  ["t6","n","Lützelsee",["Kleiner Naturschutzsee im Hinterland mit Storchennestern und Café.","Small nature-reserve lake in the hinterland with stork nests and a café.","Piccolo lago protetto nell'entroterra, con nidi di cicogne e caffè.","Petit lac protégé dans l'arrière-pays, nids de cigognes et café."],0,"Lützelsee"],
+  ["t7","c","Zürich",["Mit der S-Bahn in 17 Minuten: Altstadt, Bahnhofstrasse, Seepromenade.","17 minutes by S-Bahn: old town, Bahnhofstrasse, lake promenade.","17 minuti in S-Bahn: centro storico, Bahnhofstrasse, lungolago.","17 minutes en S-Bahn : vieille ville, Bahnhofstrasse, quais."],"https://www.zuerich.com","Zürich Altstadt"],
+  ["t8","c","Rapperswil",["Rosenstadt mit Schloss, Altstadt und Holzsteg über den See – mit Zug oder Schiff.","Town of roses with castle, old town and wooden lake bridge – by train or boat.","Città delle rose con castello, centro storico e passerella in legno sul lago – in treno o battello.","Ville des roses avec château, vieille ville et passerelle en bois sur le lac – en train ou bateau."],0,"Rapperswil Altstadt"],
+  ["t9","r","Landesmuseum Zürich",["Schweizer Geschichte und Kultur, direkt beim Hauptbahnhof.","Swiss history and culture, right next to Zurich main station.","Storia e cultura svizzera, accanto alla stazione centrale.","Histoire et culture suisses, à côté de la gare centrale."],"https://www.landesmuseum.ch","Landesmuseum Zürich"],
+  ["t10","r","Kunsthaus Zürich",["Grosse Kunstsammlung von Alten Meistern bis Gegenwart.","Major art collection from Old Masters to contemporary.","Grande collezione d'arte, dai maestri antichi al contemporaneo.","Grande collection d'art, des maîtres anciens à l'art contemporain."],"https://www.kunsthaus.ch","Kunsthaus Zürich"],
+  ["t11","r","Alpamare Pfäffikon SZ",["Wasserpark mit Rutschen und Thermalbad am oberen Zürichsee.","Water park with slides and thermal pool on upper Lake Zurich.","Parco acquatico con scivoli e piscina termale sull'alto lago di Zurigo.","Parc aquatique avec toboggans et bains thermaux sur le haut lac de Zurich."],0,"Alpamare Pfäffikon"]
+];
+const GAL = ["studio","bett","sitzecke","sofa","fenster","parkett","eingang"];
+const PAGES = {
+  ankunft: l => `<ol class="steps">${[
+      [["Adresse","Address","Indirizzo","Adresse"],[ADDR+" – das Studio liegt im Untergeschoss unseres Hauses.",ADDR+" – the studio is on the lower floor of our house.",ADDR+" – lo studio si trova al piano inferiore della nostra casa.",ADDR+" – le studio se trouve au rez-inférieur de notre maison."],R(ADDR)],
+      [["Parkplatz","Parking","Parcheggio","Parking"],["Gratis und für Sie reserviert vor dem Haus, beim Airbnb-Schild. Bitte nur parallel zur Strasse parkieren.","Free and reserved for you in front of the house, by the Airbnb sign. Please park parallel to the street only.","Gratuito e riservato davanti alla casa, vicino al cartello Airbnb. Parcheggiare solo parallelamente alla strada.","Gratuite et réservée devant la maison, près du panneau Airbnb. Merci de vous garer uniquement parallèlement à la rue."]],
+      [["Schlüsselbox","Key box","Cassetta delle chiavi","Boîte à clé"],["Sie checken selbst ein: Den Code für die Schlüsselbox erhalten Sie vor der Anreise per Nachricht.","Self check-in: you receive the key box code by message before arrival.","Check-in autonomo: il codice della cassetta vi arriva per messaggio prima dell'arrivo.","Arrivée autonome : vous recevez le code de la boîte à clé par message avant l'arrivée."]],
+      [["Zum Studio","To the studio","Allo studio","Jusqu'au studio"],["Über die Garage oder durch den Haupteingang und mit dem Lift ins Untergeschoss.","Through the garage, or via the main entrance and the lift to the lower floor.","Dal garage oppure dall'ingresso principale e con l'ascensore al piano inferiore.","Par le garage, ou par l'entrée principale et l'ascenseur jusqu'au rez-inférieur."]]
+    ].map(s=>`<li><b>${s[0][l]}</b>${s[1][l]}${s[2]?` <a href="${s[2]}">${UI.route[l]} ›</a>`:""}</li>`).join("")}</ol>` + cards([
+    [["Mit dem Zug","By train","In treno","En train"],["S-Bahn bis Männedorf, ab Zürich HB rund 17 Minuten. Vom Bahnhof sind es 10 Minuten zu Fuss, die Bushaltestelle liegt 2 Minuten vom Haus.","S-Bahn to Männedorf, about 17 minutes from Zurich HB. 10 minutes' walk from the station; the bus stop is 2 minutes from the house.","S-Bahn fino a Männedorf, circa 17 minuti da Zurigo HB. Dalla stazione 10 minuti a piedi; la fermata del bus è a 2 minuti dalla casa.","S-Bahn jusqu'à Männedorf, env. 17 min depuis Zurich HB. 10 min à pied depuis la gare ; l'arrêt de bus est à 2 min de la maison."],"https://www.sbb.ch"],
+    [["Vom Flughafen","From the airport","Dall'aeroporto","Depuis l'aéroport"],["Mit dem Zug nach Zürich HB, dort in die S-Bahn Richtung Rapperswil umsteigen bis Männedorf.","Train to Zurich HB, then change to the S-Bahn towards Rapperswil and get off at Männedorf.","Treno fino a Zurigo HB, poi S-Bahn direzione Rapperswil fino a Männedorf.","Train jusqu'à Zurich HB, puis S-Bahn direction Rapperswil jusqu'à Männedorf."],"https://www.sbb.ch"],
+    [["Mit dem Auto","By car","In auto","En voiture"],["Navigation auf «"+ADDR+"» einstellen. Der reservierte Platz ist vor dem Haus.","Set your navigation to «"+ADDR+"». Your reserved space is in front of the house.","Impostare il navigatore su «"+ADDR+"». Il posto riservato è davanti alla casa.","Réglez le GPS sur «"+ADDR+"». La place réservée est devant la maison."],R(ADDR)],
+    [["Fragen bei der Anreise?","Questions on arrival?","Domande all'arrivo?","Une question à l'arrivée ?"],["Rufen Sie uns an oder schreiben Sie per SMS oder WhatsApp: +41 79 601 57 81.","Call us or send a text or WhatsApp: +41 79 601 57 81.","Chiamateci o scriveteci via SMS o WhatsApp: +41 79 601 57 81.","Appelez-nous ou écrivez par SMS ou WhatsApp : +41 79 601 57 81."],"https://wa.me/41796015781"]
+  ], l),
+  studio: l => cards([
+    [["Das Studio","The studio","Lo studio","Le studio"],["30 m² im Untergeschoss eines ruhigen Minergie-Passivhauses. Das grosse, erhöht liegende Fenster nach Osten zeigt in den Garten – das Studio ist deshalb ruhig und eher gedämpft hell.","30 m² on the lower floor of a quiet Minergie passive house. The large, raised east-facing window looks into the garden – so the studio is quiet and softly lit.","30 m² al piano inferiore di una tranquilla casa passiva Minergie. La grande finestra rialzata a est dà sul giardino – lo studio è quindi silenzioso e con luce soffusa.","30 m² au rez-inférieur d'une maison passive Minergie au calme. La grande fenêtre surélevée à l'est donne sur le jardin – le studio est donc calme et doucement éclairé."]],
+    [["Schlafen","Sleeping","Dormire","Dormir"],["Doppelbett 180 × 200 cm, frisch bezogen. Frottiertücher liegen bereit, dazu viel Schrankraum für Ihre Sachen.","Double bed 180 × 200 cm, freshly made. Towels are provided, plus plenty of wardrobe space.","Letto matrimoniale 180 × 200 cm, con biancheria pulita. Asciugamani forniti e tanto spazio negli armadi.","Lit double 180 × 200 cm, draps propres. Serviettes fournies et beaucoup de rangement."]],
+    [["Bad","Bathroom","Bagno","Salle de bain"],["Eigenes Bad mit Dusche und WC.","Private bathroom with shower and toilet.","Bagno privato con doccia e WC.","Salle de bain privée avec douche et WC."]],
+    [["Kaffee & Tee","Coffee & tea","Caffè & tè","Café & thé"],["Nespresso-Maschine mit Kapseln, dazu Tee und Zucker.","Nespresso machine with capsules, plus tea and sugar.","Macchina Nespresso con capsule, tè e zucchero.","Machine Nespresso avec capsules, thé et sucre."]],
+    [["WLAN & TV","Wi-Fi & TV","Wi-Fi & TV","Wi-Fi & TV"],["Schnelles WLAN und Satelliten-TV. Die Zugangsdaten erhalten Sie von uns – fragen Sie einfach kurz nach.","Fast Wi-Fi and satellite TV. We'll give you the Wi-Fi details – just ask.","Wi-Fi veloce e TV satellitare. Vi diamo noi i dati di accesso – chiedete pure.","Wi-Fi rapide et TV satellite. Nous vous donnons les identifiants – demandez simplement."]],
+    [["Arbeiten","Working","Lavorare","Travailler"],["Ruhiger Platz zum Arbeiten am Laptop – ideal für Geschäftsreisen und längere Aufenthalte.","A quiet spot to work on your laptop – ideal for business trips and longer stays.","Un angolo tranquillo per lavorare al portatile – ideale per viaggi di lavoro e soggiorni lunghi.","Un coin calme pour travailler sur ordinateur – idéal pour les voyages d'affaires et les longs séjours."]],
+    [["Klima","Climate","Clima","Climat"],["Fussbodenheizung und Lüftung sorgen das ganze Jahr für angenehme Luft.","Underfloor heating and ventilation keep the air pleasant all year.","Riscaldamento a pavimento e ventilazione garantiscono aria gradevole tutto l'anno.","Chauffage au sol et ventilation assurent un air agréable toute l'année."]],
+    [["Garten","Garden","Giardino","Jardin"],["Sitzplätze mit Blick auf den Zürichsee und eine Tischtennisplatte – Sie sind herzlich eingeladen.","Seating with a view of Lake Zurich and a table-tennis table – you're welcome to use them.","Posti a sedere con vista sul lago di Zurigo e un tavolo da ping-pong – a vostra disposizione.","Coin assis avec vue sur le lac de Zurich et table de ping-pong – à votre disposition."]],
+    [["Hausregeln","House rules","Regole della casa","Règlement"],["Max. 2 Gäste · Rauchverbot im ganzen Haus · Nachtruhe ab 22 Uhr – danke für die Rücksicht auf die Nachbarn.","Max. 2 guests · No smoking anywhere in the house · Quiet after 10 pm – thank you for considering the neighbours.","Max. 2 ospiti · Vietato fumare in tutta la casa · Silenzio dalle 22 – grazie per il rispetto dei vicini.","2 personnes max. · Interdiction de fumer dans toute la maison · Calme dès 22 h – merci pour les voisins."]],
+    [["In der Nähe","Nearby","Nelle vicinanze","À proximité"],["Bus 2 Min. · See 8 Min. · Bahnhof 10 Min. · Boldern 20 Min. – alles zu Fuss.","Bus 2 min · Lake 8 min · Station 10 min · Boldern 20 min – all on foot.","Bus 2 min · Lago 8 min · Stazione 10 min · Boldern 20 min – tutto a piedi.","Bus 2 min · Lac 8 min · Gare 10 min · Boldern 20 min – à pied."]]
+  ],l),
+  fotos: l => `<div class="gal">${GAL.map(g=>`<a href="img/${g}.jpg" data-lb="img/${g}.jpg"><img src="img/${g}.jpg" alt="" loading="lazy"></a>`).join("")}</div>`,
+  ausfluege: l => list("trips",l),
+  essen: l => list("food",l) + `<p class="more">${UI.moreR[l]} <a href="${Q("Restaurant Männedorf")}">Google Maps</a></p>`,
+  einkauf: l => list("shop",l),
+  unterwegs: l => cards([
+    [["Fahrplan","Timetable","Orario","Horaire"],["Zug, Bus und Schiff ab Männedorf.","Train, bus and boat from Männedorf.","Treno, bus e battello da Männedorf.","Train, bus et bateau depuis Männedorf."],"https://www.sbb.ch"],
+    [["ZVV","ZVV","ZVV","ZVV"],["Tickets und Tageskarten für den Grossraum Zürich.","Tickets and day passes for the Zurich area.","Biglietti e carte giornaliere per la regione di Zurigo.","Billets et cartes journalières pour la région de Zurich."],"https://www.zvv.ch"],
+    [["Zürichsee-Schifffahrt","Lake Zurich boats","Battelli lago di Zurigo","Bateaux du lac de Zurich"],["Kursschiffe ab dem Schiffsteg Männedorf.","Scheduled boats from the Männedorf landing stage.","Battelli di linea dall'imbarcadero di Männedorf.","Bateaux réguliers depuis le débarcadère de Männedorf."],"https://www.zsg.ch"],
+    [["Wetter","Weather","Meteo","Météo"],["Lokale Prognose für Männedorf und den Zürichsee.","Local forecast for Männedorf and Lake Zurich.","Previsioni locali per Männedorf e il lago di Zurigo.","Prévisions locales pour Männedorf et le lac de Zurich."],"https://www.meteoschweiz.admin.ch"]
+  ],l),
+  notfall: l => `<div class="sos">${[["144",["Sanität","Ambulance","Ambulanza","Ambulance"]],["117",["Polizei","Police","Polizia","Police"]],["118",["Feuerwehr","Fire","Pompieri","Pompiers"]],["112",["Euro-Notruf","EU emergency","Emergenza UE","Urgence UE"]]].map(x=>`<a href="tel:${x[0]}"><b>${x[0]}</b>${x[1][l]}</a>`).join("")}</div>` + cards([
+    [["Ihre Gastgeber","Your hosts","I vostri host","Vos hôtes"],["Samira & Bertram Henning · Mobil +41 79 601 57 81 (Anruf, SMS, WhatsApp) · Festnetz +41 44 491 22 33","Samira & Bertram Henning · Mobile +41 79 601 57 81 (call, text, WhatsApp) · Landline +41 44 491 22 33","Samira & Bertram Henning · Cellulare +41 79 601 57 81 (chiamata, SMS, WhatsApp) · Fisso +41 44 491 22 33","Samira & Bertram Henning · Mobile +41 79 601 57 81 (appel, SMS, WhatsApp) · Fixe +41 44 491 22 33"],"https://wa.me/41796015781"],
+    [["Spital Männedorf","Männedorf hospital","Ospedale di Männedorf","Hôpital de Männedorf"],["Das Regionalspital mit Notfallstation liegt hier im Dorf.","The regional hospital with emergency department is right here in the village.","L'ospedale regionale con pronto soccorso si trova qui in paese.","L'hôpital régional avec service d'urgences se trouve ici au village."],Q("Spital Männedorf")],
+    [["Rega · Vergiftung","Air rescue · Poisoning","Rega · Avvelenamento","Rega · Intoxication"],["Rega 1414 · Tox Info Suisse 145","Rega 1414 · Tox Info Suisse 145","Rega 1414 · Tox Info Suisse 145","Rega 1414 · Tox Info Suisse 145"]],
+    [["Probleme im Studio?","Problem in the studio?","Problemi nello studio?","Un souci dans le studio ?"],["Heizung, Wasser, Schlüssel: bitte direkt uns kontaktieren – wir helfen rasch.","Heating, water, key: please contact us directly – we'll help quickly.","Riscaldamento, acqua, chiave: contattateci direttamente – aiutiamo subito.","Chauffage, eau, clé : contactez-nous directement – nous aidons rapidement."]]
+  ],l),
+  abreise: l => cards([
+    [["Vor dem Gehen","Before you leave","Prima di partire","Avant de partir"],["Abfall in den Eimer · Fenster schliessen · Licht und TV aus · nichts im Schrank vergessen","Rubbish in the bin · Close the windows · Lights and TV off · Check the wardrobe","Rifiuti nel cestino · Chiudere le finestre · Luci e TV spente · Controllare l'armadio","Déchets à la poubelle · Fermer les fenêtres · Éteindre lumière et TV · Vérifier l'armoire"]],
+    [["Schlüssel","Key","Chiave","Clé"],["Bitte den Schlüssel wieder in die Schlüsselbox legen und die Box gut schliessen.","Please put the key back in the key box and close it properly.","Rimettete la chiave nella cassetta e chiudetela bene.","Remettez la clé dans la boîte à clé et refermez-la bien."]],
+    [["Hat es Ihnen gefallen?","Did you enjoy your stay?","Vi è piaciuto il soggiorno?","Votre séjour vous a plu ?"],["Eine Bewertung auf Ihrer Buchungsplattform hilft uns sehr. Merci vielmal!","A review on your booking platform helps us a lot. Thank you!","Una recensione sulla piattaforma di prenotazione ci aiuta molto. Grazie!","Un avis sur votre plateforme de réservation nous aide beaucoup. Merci !"]],
+    [["Wünsche & Verbesserungen","Wishes & suggestions","Desideri & suggerimenti","Souhaits & suggestions"],["Etwas gefehlt oder kaputt? Sagen Sie es uns direkt – wir kümmern uns darum.","Something missing or broken? Tell us directly – we'll take care of it.","Manca qualcosa o è rotto? Ditecelo direttamente.","Quelque chose manque ou est cassé ? Dites-le-nous directement."]]
+  ],l)
+};
+
+let lang = "de", favs = [], filt = {trips:"l", food:"all", shop:"all"};
+try { favs = JSON.parse(localStorage.getItem("mf_favs") || "[]"); lang = localStorage.getItem("mf_lang") || ""; } catch(e) {}
+if (L.indexOf(lang) < 0) { const n = (navigator.language || "de").slice(0,2); lang = L.indexOf(n) >= 0 ? n : "en"; }
+const li = () => L.indexOf(lang);
+const save = () => { try { localStorage.setItem("mf_favs", JSON.stringify(favs)); localStorage.setItem("mf_lang", lang); } catch(e) {} };
+
+function cards(arr, l) {
+  return `<div class="cards">${arr.map(c => `<div class="c"><h3>${c[0][l]}</h3><p>${c[1][l]}</p>${c[2] ? `<div class="links"><a href="${c[2]}">${c[2].indexOf("wa.me") >= 0 ? "WhatsApp" : c[2].indexOf("google.com/maps") >= 0 ? UI.map[l] : UI.web[l]}</a></div>` : ""}</div>`).join("")}</div>`;
+}
+function place(p, l, kind) {
+  const isT = kind === "trips";
+  const txt = isT ? p[3][l] : p[4][l], url = isT ? p[4] : p[5];
+  const mapq = isT ? p[5] : p[2] + " " + p[3] + " Männedorf";
+  const on = favs.indexOf(p[0]) >= 0;
+  return `<div class="c"><button class="fav" data-f="${p[0]}" aria-label="favorite">${on ? "♥" : "♡"}</button><h3>${p[2]}</h3><p>${txt}</p>${isT ? "" : `<div class="addr">${p[3]}</div><span class="tag">${p[1]}</span>`}<div class="links"><a href="${Q(mapq)}">${UI.map[l]}</a>${url ? `<a href="${url}">${UI.web[l]}</a>` : ""}</div></div>`;
+}
+function list(kind, l) {
+  const data = kind === "trips" ? TRIPS : kind === "food" ? FOOD : SHOP;
+  let chips, items;
+  if (kind === "trips") {
+    chips = [["l",UI.lake[l]],["n",UI.nature[l]],["c",UI.city[l]],["r",UI.rain[l]],["fav",UI.favs[l]]];
+    items = filt.trips === "fav" ? data.filter(p => favs.indexOf(p[0]) >= 0) : data.filter(p => p[1] === filt.trips);
+  } else {
+    chips = [["all",UI.all[l]],["fav",UI.favs[l]]];
+    items = filt[kind] === "fav" ? data.filter(p => favs.indexOf(p[0]) >= 0) : data;
+  }
+  const cur = filt[kind];
+  const ch = `<div class="chips">${chips.map(c => `<button data-k="${kind}" data-v="${c[0]}" class="${cur === c[0] ? "on" : ""}">${c[1]}</button>`).join("")}${cur === "fav" && items.length ? `<button data-clear="1">${UI.clear[l]}</button>` : ""}</div>`;
+  return ch + (items.length ? `<div class="cards">${items.map(p => place(p, l, kind)).join("")}</div>` : `<p class="empty">${UI.nofav[l]}</p>`);
+}
+
+function render() {
+  const l = li();
+  document.documentElement.lang = lang;
+  document.querySelectorAll("[data-t]").forEach(e => { e.textContent = UI[e.dataset.t][l]; });
+  document.getElementById("langs").innerHTML = L.map(x => `<button data-lang="${x}" class="${x === lang ? "on" : ""}">${LN[x]}</button>`).join("");
+  document.getElementById("facts").innerHTML = UI.facts[l].map(f => `<span>${f}</span>`).join("");
+  document.getElementById("tiles").innerHTML = TILES.map(t => `<a class="tile" href="#${t[0]}"><span class="ico"><svg viewBox="0 0 24 24">${t[1]}</svg></span><div><h3>${t[2][l]}</h3><p>${t[3][l]}</p></div></a>`).join("");
+  route(false);
+}
+function route(scroll) {
+  const h = (location.hash || "").replace("#", "");
+  const t = TILES.filter(x => x[0] === h)[0];
+  document.getElementById("v-start").classList.toggle("on", !t);
+  document.getElementById("v-page").classList.toggle("on", !!t);
+  if (t) {
+    document.getElementById("ptitle").textContent = t[2][li()];
+    document.getElementById("pbody").innerHTML = PAGES[h](li());
+  }
+  if (scroll !== false) window.scrollTo(0, 0);
+}
+
+const lb = document.getElementById("lb");
+document.addEventListener("click", e => {
+  const a = e.target.closest("a[data-lb]");
+  if (a) { e.preventDefault(); lb.querySelector("img").src = a.dataset.lb; lb.classList.add("on"); return; }
+  if (e.target.closest("#lb")) { lb.classList.remove("on"); return; }
+  const b = e.target.closest("button");
+  if (!b) return;
+  if (b.dataset.lang) { lang = b.dataset.lang; save(); render(); }
+  else if (b.dataset.f) { const i = favs.indexOf(b.dataset.f); if (i >= 0) favs.splice(i, 1); else favs.push(b.dataset.f); save(); route(false); }
+  else if (b.dataset.k) { filt[b.dataset.k] = b.dataset.v; route(false); }
+  else if (b.dataset.clear) { favs = []; save(); route(false); }
+});
+window.addEventListener("hashchange", () => route(true));
+render();
+
+/* Fotos im Kopfbereich wechseln alle 6 Sek. */
+const sl = document.querySelectorAll(".slide"), dots = document.getElementById("dots");
+dots.innerHTML = Array.prototype.map.call(sl, (s, i) => `<i class="${i ? "" : "on"}"></i>`).join("");
+let si = 0;
+setInterval(() => { sl[si].classList.remove("on"); dots.children[si].classList.remove("on"); si = (si + 1) % sl.length; sl[si].classList.add("on"); dots.children[si].classList.add("on"); }, 6000);
+})();
+</script>
+</body>
+</html>
